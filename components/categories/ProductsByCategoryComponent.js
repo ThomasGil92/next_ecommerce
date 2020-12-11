@@ -9,8 +9,8 @@ const ProductsByCategoryComponent = ({ selectedCategory, products }) => {
           products.products.map(
             (product) =>
               product.categorie._id === selectedCategory._id && (
-                <div className="col-4">
-                  <div className="card">
+                <div className="col-4 mx-auto mb-3">
+                  <div className="card" style={{maxWidth:"290px"}}>
                   <img src={product.imageUrl} className="card-img-top" alt={product.productName}/>
                     <div className="card-body p-3">
                       <div className="card-title">

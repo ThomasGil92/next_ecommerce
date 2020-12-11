@@ -8,7 +8,7 @@ const AddProductForm = ({ categories }) => {
     productName: "",
     price: "",
     description: "",
-    imageUrl: "",
+    imageUrl: "http://via.placeholder.com/290x290/ffc107/ffffff/?text=Exemple+d%27image+290x290",
     stock: "",
     categorie: "",
   });

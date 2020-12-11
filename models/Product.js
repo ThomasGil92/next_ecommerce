@@ -18,6 +18,7 @@ const productSchema = new Schema(
     },
     imageUrl:{
       type:String,
+      default:"http://via.placeholder.com/290x290/ffc107/ffffff/?text=Exemple+d%27image+290x290"
     },
     description: {
       type: String,

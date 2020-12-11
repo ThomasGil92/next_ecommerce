@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from 'next/link'
 
 const PublicNavBar = () => {
   const [searchTerms, setSearchTerms] = useState("");
@@ -8,10 +9,11 @@ const PublicNavBar = () => {
     setSearchTerms(e.target.value);
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white p-0 m-0">
-      <a className="navbar-brand" href="#">
+    <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-white p-0 m-0">
+      <Link href={"/"}>
+      <a className="navbar-brand" >
         Logo
-      </a>
+      </a></Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -33,7 +35,7 @@ const PublicNavBar = () => {
                 width: searchTerms && searchTerms !== "" ? "310px" : "400px",
                 fontFamily: "FontAwesome",
               }}
-              className="form-control rounded-pill  my-2 d-inline-block"
+              className="form-control rounded-pill d-inline-block"
               placeholder="&#61442;"
               onChange={handleSearch}
               aria-label="Recipient's username"
@@ -47,7 +49,7 @@ const PublicNavBar = () => {
                   marginLeft: "-35px", zIndex: "5",
                 }}
               >
-                <button className="btn btn-dark rounded-pill w-100" type="button">
+                <button className="btn btn-dark rounded-pill w-100 py-1" type="button">
                   Rechercher
                 </button>
               </div>
