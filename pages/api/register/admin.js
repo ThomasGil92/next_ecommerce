@@ -6,8 +6,8 @@ const AWS = require("aws-sdk");
 const { registerEmailParamsForAdmin } = require("../../../utils/email");
 
 AWS.config.update({
-  accessKeyId: "AKIARGDELGJFVZ6LZLU2",
-  secretAccessKey: "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",
+  accessKeyId: process.env.AWS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: 'us-east-1',
 });
 
