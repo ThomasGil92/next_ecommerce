@@ -1,4 +1,5 @@
 export const SET_ADMIN = "SET_ADMIN";
+export const SET_CART = "SET_CART";
 
 export const setAdmin = () => (dispatch) => {
   if (process.browser) {
@@ -17,11 +18,20 @@ export const setAdmin = () => (dispatch) => {
   }
 };
 
-export const clearAdmin=()=>(dispatch)=>{
-    if(process.browser){
-        dispatch({
-            type:SET_ADMIN,
-            payload:''
-        })
-    }
-}
+export const setCart = () => (dispatch) => {
+  if (localStorage.getItem("cart")) {
+    dispatch({
+      type: SET_CART,
+      payload: JSON.parse(localStorage["cart"]),
+    });
+  }
+};
+
+export const clearAdmin = () => (dispatch) => {
+  if (process.browser) {
+    dispatch({
+      type: SET_ADMIN,
+      payload: "",
+    });
+  }
+};

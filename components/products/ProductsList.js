@@ -19,7 +19,6 @@ const ProductsList = ({ products, categories }) => {
     $("#exampleModal").on("show.bs.modal", function (event) {
       var button = $(event.relatedTarget); // Button that triggered the modal
       var recipient = button.data("whatever");
-      console.log(recipient);
       setToUpdate({
         _id: recipient._id,
         productName: recipient.productName,
@@ -40,7 +39,6 @@ const ProductsList = ({ products, categories }) => {
       const response = await axios.put(`/api/product/update`, {
         toUpdate,
       });
-      console.log(response);
       router.reload(window.location.pathname);
     } catch (error) {
       console.log(error);

@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 const PublicProductList = ({ products }) => {
   const router = useRouter();
   const categoryId = router.query.id;
-  console.log(categoryId)
   return (
     <div className="mt-5 mx-0 text-center bg-third">
       <div className="container-fluid">

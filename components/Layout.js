@@ -44,7 +44,6 @@ const Layout = ({ children }) => {
         crossOrigin="anonymous"
       ></script>
 
-      <script>var Alert = ReactBootstrap.Alert;</script>
     </Head>
   );
   return (

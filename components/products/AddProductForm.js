@@ -69,8 +69,6 @@ const AddProductForm = ({ categories }) => {
         const response = await axios.post(`/api/product/add`, {
           productFields,
         });
-
-        console.log(response);
       }
 
       router.push("/products");

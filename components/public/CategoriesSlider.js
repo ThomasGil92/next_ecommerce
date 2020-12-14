@@ -11,10 +11,10 @@ const CategoriesSlider = ({ categories }) => {
         {categories &&
           categories.categories.map((category, i) => {
             return (
-              <Link href={`/categorie/${category._id}`} passHref>
+              <Link key={i} href={`/categorie/${category._id}`} passHref>
                 <div
                   style={{ cursor: "pointer" }}
-                  key={i}
+                  
                   className={i === 0 ? "carousel-item active" : "carousel-item"}
                 >
                   <img

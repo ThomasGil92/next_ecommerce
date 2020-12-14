@@ -4,7 +4,6 @@ import CategoriesSlider from "../components/public/CategoriesSlider";
 import PublicProductList from "../components/public/PublicProductList";
 
 export default function Home({ categories,products }) {
-  console.log(products)
   return (
     <Layout>
       <PublicNavBar />
