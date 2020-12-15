@@ -12,6 +12,7 @@ const PublicProductList = ({ products }) => {
     productName: "",
     stock: "",
     imageUrl: "",
+    quantityInCart: 0,
   });
   const {
     productName,
@@ -20,6 +21,7 @@ const PublicProductList = ({ products }) => {
     description,
     price,
     _id,
+    quantityInCart,
   } = selectedProduct;
   useEffect(() => {
     $("#exampleModal").on("show.bs.modal", function (event) {
@@ -32,23 +34,43 @@ const PublicProductList = ({ products }) => {
         price: recipient.price,
         imageUrl: recipient.imageUrl,
         description: recipient.description,
+        quantityInCart: recipient.quantityInCart,
       });
     });
   }, []);
 
   const addToCart = (productToAdd) => (e) => {
+    productToAdd.quantityInCart++;
     e.preventDefault;
     var cart = [];
+
     if (!localStorage.getItem("cart")) {
+      productToAdd.quantityInCart = 1;
       cart.push(productToAdd);
-      console.log(cart);
       localStorage.setItem("cart", JSON.stringify(cart));
     } else {
       const allProductInCart = localStorage.getItem("cart");
-      JSON.parse(allProductInCart).forEach((p) => {
-        cart.push(p);
-      });
-      cart.push(productToAdd);
+      const found = JSON.parse(allProductInCart).find(
+        (e) => e._id === productToAdd._id,
+      );
+      if (found) {
+        found.quantityInCart += 1;
+        cart.push(found);
+        JSON.parse(allProductInCart).forEach((p) => {
+          if (p._id !== found._id) {
+            cart.push(p);
+          }
+        });
+      } else {
+        productToAdd.quantityInCart = 1;
+        cart.push(productToAdd);
+        JSON.parse(allProductInCart).forEach((p) => {
+          cart.push(p);
+        });
+      }
+
+      //cart.push(p);
+      console.log(cart);
       localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(cart));
     }
@@ -66,7 +88,6 @@ const PublicProductList = ({ products }) => {
                 <div key={i} className="col-md-3">
                   <div
                     className="card mx-auto my-3"
-                   
                     style={{
                       maxWidth: "290px",
                       borderRadius: "15px",
@@ -74,25 +95,25 @@ const PublicProductList = ({ products }) => {
                     }}
                   >
                     <img
-                     data-toggle="modal"
-                     data-target="#exampleModal"
-                     data-whatever={JSON.stringify(product)}
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      data-whatever={JSON.stringify(product)}
                       src={product.imageUrl}
                       className="card-img-top"
                       alt={product.productName}
                       style={{
-                        cursor:"pointer",
+                        cursor: "pointer",
                         borderTopRightRadius: "15px",
                         borderTopLeftRadius: "15px",
                       }}
                     />
                     <div className="card-body text-left p-2 d-flex flex-column justify-content-between">
                       <h5
-                       data-toggle="modal"
-                       data-target="#exampleModal"
-                       data-whatever={JSON.stringify(product)}
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        data-whatever={JSON.stringify(product)}
                         className="card-title py-3"
-                        style={{ lineHeight: "0.8",cursor:"pointer" }}
+                        style={{ lineHeight: "0.8", cursor: "pointer" }}
                       >
                         {product.productName.charAt(0).toUpperCase() +
                           product.productName.slice(1)}
@@ -103,7 +124,7 @@ const PublicProductList = ({ products }) => {
                         </div>
                         <div className="col-md-6 px-0">
                           <motion.button
-                          onClick={addToCart(product)}
+                            onClick={addToCart(product)}
                             initial={{
                               backgroundColor: "#e5e5e5",
                               color: "black",
@@ -186,7 +207,6 @@ const PublicProductList = ({ products }) => {
             </div>
           </div>
         </div>
-        <div></div>
       </div>
     </div>
   );

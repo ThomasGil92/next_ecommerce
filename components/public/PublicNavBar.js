@@ -1,10 +1,10 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import {setCart} from '../../redux/actions'
-import { useSelector,useDispatch } from "react-redux";
+import { setCart } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const PublicNavBar = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const [searchTerms, setSearchTerms] = useState("");
 
@@ -66,10 +66,17 @@ const PublicNavBar = () => {
             )}
           </div>
         </form>
-        <div className="btn btn-warning pb-2 pt-1 rounded-0 d-flex flex-column align-items-center">
-          <div className="d-flex position-relative w-100"><i className="fas fa-shopping-cart fa-2x position-absolute"></i><span className="text-white mx-auto" style={{zIndex:"10"}}>{cart.length}</span></div>
-          <p className="m-0 mt-1">Panier</p>
-        </div>
+        <Link href="/cart" passHref>
+          <div className="btn btn-warning pb-2 pt-1 rounded-0 d-flex flex-column align-items-center">
+            <div className="d-flex position-relative w-100">
+              <i className="fas fa-shopping-cart fa-2x position-absolute"></i>
+              <span className="text-white mx-auto" style={{ zIndex: "10" }}>
+                {cart.length}
+              </span>
+            </div>
+            <p className="m-0 mt-1">Panier</p>
+          </div>
+        </Link>
       </div>
     </nav>
   );
