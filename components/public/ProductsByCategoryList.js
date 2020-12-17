@@ -42,7 +42,7 @@ const PublicProductList = ({ products }) => {
   }, []);
 
   const addToCart = (productToAdd) => (e) => {
-    e.preventDefault;
+    e.preventDefault();
     var cart = [];
     if (!localStorage.getItem("cart")) {
       productToAdd.quantityInCart++

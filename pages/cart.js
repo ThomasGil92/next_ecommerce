@@ -1,7 +1,43 @@
 import Layout from "../components/Layout";
 import PublicNavBar from "../components/public/PublicNavBar";
 import CartRecap from "../components/public/CartRecap";
+import Link from "next/link";
+import {useSelector} from 'react-redux'
+import {useEffect,useState} from 'react'
 const Cart = () => {
+  const [totalNumberOfArticle,setTotalNumberOfArticle]=useState()
+  const [totalPrice,setTotalPrice]=useState()
+  const cart = useSelector((state) => state.cart);
+useEffect(()=>{
+    if (process.browser) {
+      var cart = JSON.parse(localStorage.getItem("cart"));
+      var t = 0;
+      cart.map((p) => {
+        t += p.quantityInCart;
+      });
+      setTotalNumberOfArticle(t)
+
+      var t2=0
+      cart.map((p) => {
+        const totalOfP = p.price * p.quantityInCart;
+        t2 += totalOfP;
+      });
+      setTotalPrice(Number.parseFloat(t2).toFixed(2))
+    }
+  /* const totalPrice = () => {
+    if (process.browser) {
+      var cart = JSON.parse(localStorage.getItem("cart"));
+      console.log(cart);
+      var t = 0;
+      cart.map((p) => {
+        const totalOfP = p.price * p.quantityInCart;
+        t += totalOfP;
+      });
+      return Number.parseFloat(t).toFixed(2);
+    }
+  }; */
+},[cart])
+  
   return (
     <Layout>
       <PublicNavBar />
@@ -9,7 +45,12 @@ const Cart = () => {
         <div className="col-6 py-3 mx-auto d-flex justify-content-between">
           <div
             className="circle bg-warning m-2 text-center text-center d-flex justify-content-center align-items-center"
-            style={{ width: "75px", height: "75px", borderRadius: "37.5px",zIndex:"1" }}
+            style={{
+              width: "75px",
+              height: "75px",
+              borderRadius: "37.5px",
+              zIndex: "1",
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -31,20 +72,96 @@ const Cart = () => {
           </div>
           <div
             className="circle bg-third m-2 d-flex justify-content-center align-items-center text-white"
-            style={{ width: "75px", height: "75px", borderRadius: "37.5px",zIndex:"1",backgroundColor:"#e6e6e6" }}
+            style={{
+              width: "75px",
+              height: "75px",
+              borderRadius: "37.5px",
+              zIndex: "1",
+              backgroundColor: "#e6e6e6",
+            }}
           >
             <strong style={{ fontSize: "25px" }}>2</strong>
           </div>
           <div
             className="circle m-2 d-flex justify-content-center align-items-center text-white"
-            style={{ width: "75px", height: "75px", borderRadius: "37.5px",zIndex:"1",backgroundColor:"#e6e6e6" }}
+            style={{
+              width: "75px",
+              height: "75px",
+              borderRadius: "37.5px",
+              zIndex: "1",
+              backgroundColor: "#e6e6e6",
+            }}
           >
             <strong style={{ fontSize: "25px" }}>3</strong>
           </div>
         </div>
-        <div className="col-5 position-absolute" style={{minHeight:"4px",top:125,left:"30%",zIndex:"0",backgroundColor:"#e6e6e6"}}></div>
+        <div
+          className="col-5 position-absolute"
+          style={{
+            minHeight: "4px",
+            top: 125,
+            left: "30%",
+            zIndex: "0",
+            backgroundColor: "#e6e6e6",
+          }}
+        ></div>
       </div>
-    <CartRecap/>
+      <CartRecap />
+      <div
+        className="row m-0 d-flex justify-content-between gradient-for-cart-footer fixed-bottom px-4 pb-5"
+        style={{ minHeight: "130px", fontFamily: "Montserrat, sans-serif" }}
+      >
+        <div>
+          <Link href={"/"} passHref>
+            <button className="btn bg-secondary text-white d-flex align-items-center h-100">
+              <div className="d-flex align-items-center mr-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  fill="currentColor"
+                  class="bi bi-arrow-bar-left"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"
+                  />
+                </svg>
+              </div>
+              <div className="d-flex flex-column text-left">
+                <span style={{ lineHeight: "15px", fontSize: "20px" }}>
+                  Continuer
+                </span>
+                <span style={{ lineHeight: "11px" }}>mes achats</span>
+              </div>
+            </button>
+          </Link>
+        </div>
+        <div className="d-flex align-items-center">
+          <div
+            className="d-flex flex-column text-right"
+            style={{ color: "#a5a5a5" }}
+          >
+            <span style={{ fontSize: "20px", fontWeight: "500" }}>
+              Sous total
+            </span>
+            <span style={{ fontSize: "9px", fontWeight: "600" }}>
+              {totalNumberOfArticle} articles
+            </span>
+          </div>
+          <div className="text-success ml-3" style={{ fontSize: "38px" }}>
+            {totalPrice} &euro;
+          </div>
+        </div>
+        <div>
+          <Link href={"/"} passHref>
+            <button className="btn btn-success h-100">
+              Valider mon panier
+            </button>
+          </Link>
+        </div>
+      </div>
     </Layout>
   );
 };

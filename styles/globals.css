@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 /**Products sidebar**/
@@ -20,9 +20,20 @@ a {
   border-color: #ced4da;
   box-shadow: none;
 }
+.gradient-for-cart-footer {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 30%,
+    rgba(9, 9, 121, 0) 70%
+  );
+}
+#loginUser input{
+  height:50px;
+}
 * {
   box-sizing: border-box;
 }
-.bg-third{
+.bg-third {
   background-color: #f5f5f5;
 }
