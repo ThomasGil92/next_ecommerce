@@ -3,6 +3,7 @@ import axios from "axios";
 
 const UserLoginForm = () => {
   const [completed, setCompleted] = useState(false);
+  const [error, setError] = useState("");
   const [userFields, setUserFields] = useState({
     first_name: "",
     last_name: "",
@@ -27,14 +28,16 @@ const UserLoginForm = () => {
   } = userFields;
 
   const handleChange = (name) => (e) => {
+    setError("");
     setUserFields({ ...userFields, [name]: e.target.value });
     if (
-      (first_name !== "",
-      last_name !== "",
-      address !== "",
-      zip_code !== "",
-      city !== "",
-      country !== "",
+      (first_name !== ""&&
+      last_name !== ""&&
+      address !== ""&&
+      zip_code !== ""&&
+      city !== ""&&
+      country !== ""&&
+      password!==""&&
       email !== "")
     ) {
       setCompleted(true);
@@ -46,12 +49,13 @@ const UserLoginForm = () => {
   const handleSelect = (e) => {
     setUserFields({ ...userFields, country: e.target.value });
     if (
-      (first_name !== "",
-      last_name !== "",
-      address !== "",
-      zip_code !== "",
-      city !== "",
-      country !== "",
+      (first_name !== ""&&
+      last_name !== ""&&
+      address !== ""&&
+      zip_code !== ""&&
+      city !== ""&&
+      country !== ""&&
+      password!==""&&
       email !== "")
     ) {
       setCompleted(true);
@@ -63,30 +67,45 @@ const UserLoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setUserFields({ ...userFields, buttonText: "Envoi en cours" });
       if (
-        (first_name !== "",
-        last_name !== "",
-        address !== "",
-        zip_code !== "",
-        city !== "",
-        country !== "",
+        (first_name !== ""&&
+        last_name !== ""&&
+        address !== ""&&
+        zip_code !== ""&&
+        city !== ""&&
+        country !== ""&&
+        password !== ""&&
         email !== "")
       ) {
         const response = await axios.post(`/api/user/confirmation`, {
           userFields,
         });
         console.log(response);
+        setUserFields({
+          ...userFields,
+          first_name: "",
+          last_name: "",
+          address: "",
+          zip_code: "",
+          city: "",
+          country: "",
+          email: "",
+          password: "",
+          buttonText: `Email envoyé à "${email}"`,
+        });
+        setCompleted(false);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      setError("Cet Email est déja utilisé");
     }
   };
 
   return (
-    <div id="loginUser" className="row mt-5 pt-5 mx-0 text-center">
+    <div className="row mt-5 pt-5 mx-0 text-center loginUser">
       <div className="col-10 text-center mx-auto">
         <h2 className="text-secondary">Créez votre compte</h2>
-        {userFields && JSON.stringify(userFields)}
+        {error && error !== "" && <p>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group my-4">
             <div className="row justify-content-between">
@@ -187,6 +206,7 @@ const UserLoginForm = () => {
                     : "Veuillez remplir le formulaire entièrement"
                 }
                 style={{
+                  cursor:completed?"pointer":"not-allowed",
                   minHeight: "70px",
                   fontWeight: "500",
                   fontSize: "25px",

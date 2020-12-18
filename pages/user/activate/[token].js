@@ -84,7 +84,7 @@ const ActivateAccount = () => {
         token,
       });
        console.log('account activate response', response)
-      router.push("/");
+      router.push("/user/login");
     } catch (error) {
       setState({ ...state, error: error });
     }
@@ -99,8 +99,7 @@ const ActivateAccount = () => {
           <PublicNavBar />
           <div className="d-flex align-items-center">
             <div className="col-md-6 offset-md-3 mt-5 pt-5">
-              Bienvenue {first_name} {last_name}
-              <div>{state && JSON.stringify(state)}</div>
+              <h1>Bienvenue {first_name} {last_name}</h1>
             </div>
           </div>
         </>

@@ -18,7 +18,7 @@ const Navbar = ({ router }) => {
       if (sessionStorage.getItem("master") || sessionStorage.getItem("admin")) {
         sessionStorage.clear();
         dispatch(clearAdmin());
-        router.push("/login");
+        router.push("/login-admin");
       }
     }
   };

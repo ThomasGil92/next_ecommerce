@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         } = req.body.userFields;
         const user = await User.findOne({ email });
         if (user !== null) {
-          return res.status(400).json({ error: "This user already exist" });
+        return res.status(400).json({ error: "This user already exist" });
         }
         const token = jwt.sign(
           {
@@ -70,7 +70,6 @@ export default async function handler(req, res) {
             });
           });
       } catch (error) {
-          console.log(error)
         res.status(400).json({ error });
       }
       break;

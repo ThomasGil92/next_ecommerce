@@ -28,7 +28,7 @@ a {
     rgba(9, 9, 121, 0) 70%
   );
 }
-#loginUser input{
+.loginUser input{
   height:50px;
 }
 * {

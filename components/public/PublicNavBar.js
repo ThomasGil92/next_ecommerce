@@ -1,20 +1,36 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { setCart } from "../../redux/actions";
+import {useRouter} from "next/router";
+import { setCart, setUser, clearUser } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
 const PublicNavBar = () => {
+  const router=useRouter()
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const userAuth = useSelector((state) => state.user);
   const [searchTerms, setSearchTerms] = useState("");
 
   useEffect(() => {
+    dispatch(setUser());
     dispatch(setCart());
   }, [dispatch]);
 
   const handleSearch = (e) => {
     setSearchTerms(e.target.value);
   };
+
+  const logout = (e) => {
+    e.preventDefault();
+    if (process.browser) {
+      if (sessionStorage.getItem("user")) {
+        sessionStorage.clear();
+        dispatch(clearUser());
+        router.reload();
+      }
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-white p-0 m-0">
       <Link href={"/"}>
@@ -67,23 +83,71 @@ const PublicNavBar = () => {
           </div>
         </form>
         <div className="d-flex">
-          <Link href="/account/user-register" passHref>
-            <div title="Me connecter" className="btn btn-white px-4 rounded-0 d-flex align-items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="35"
-                height="35"
-                fill="currentColor"
-                className="bi bi-person"
-                viewBox="0 0 16 16"
+          {userAuth && !userAuth.token ? (
+            <Link href="/user/login" passHref>
+              <div
+                title="Me connecter"
+                className="btn btn-white px-4 rounded-0 d-flex align-items-center"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
-                />
-              </svg>
-            </div>
-          </Link>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="35"
+                  height="35"
+                  fill="currentColor"
+                  className="bi bi-person"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
+                  />
+                </svg>
+              </div>
+            </Link>
+          ) : (
+            <>
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item dropdown mr-2 d-flex align-items-center">
+                  <a
+                    className="nav-link dropdown-toggle text-dark"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i className="fas fa-user fa-2x text-dark"></i>
+                  </a>
+                  <div
+                    className="dropdown-menu  dropdown-menu-right"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    {/* <Link href={`/admin/${isAuth.admin._id}`}>
+                    <a className="dropdown-item">Votre profil</a>
+                  </Link> */}
+
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                    <button
+                      title="Se déconnecter"
+                      className="btn btn-link text-danger dropdown-item"
+                      onClick={logout}
+                    >
+                      Déconnection
+                      <i className="fas fa-power-off"></i>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </>
+          )}
+
           <Link href="/cart" passHref>
             <div className="btn btn-warning pb-2 pt-1 rounded-0 d-flex flex-column align-items-center">
               <div className="d-flex position-relative w-100">
