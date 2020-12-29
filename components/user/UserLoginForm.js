@@ -1,13 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
-import {useRouter} from 'next/router'
-import {setUser} from "../../redux/actions"
-import {useDispatch} from 'react-redux'
-import Link from 'next/link'
+import { useRouter } from "next/router";
+import { setUser } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+import Link from "next/link";
 
 const UserLoginForm = () => {
-    const dispatch=useDispatch()
-    const router=useRouter()
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState("");
   const [userFields, setUserFields] = useState({
@@ -29,6 +29,7 @@ const UserLoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setCompleted(false);
     setUserFields({ ...userFields, buttonText: "Tentative de connection" });
     try {
       const response = await axios.post(`/api/login/user`, {
@@ -37,12 +38,12 @@ const UserLoginForm = () => {
       });
       console.log(response); // data > token / user
       sessionStorage.setItem("user", JSON.stringify(response.data));
-      dispatch(setUser())
+      dispatch(setUser());
       router.push("/");
     } catch (error) {
       console.log(error);
       setUserFields({ ...userFields, buttonText: "Connection" });
-      setCompleted(false);
+
       setError("Utilisateur introuvable ou données de connection non valides");
     }
   };
@@ -91,14 +92,15 @@ const UserLoginForm = () => {
                   fontSize: "25px",
                 }}
                 type="submit"
-                disabled={!completed}
+                disabled={!completed || password.length < 8}
               >
                 {buttonText}
               </button>
               <Link href="/account/user-register" passHref>
-              <a className="nav-link text-info px-0">
-                  Pas encore de compte?
-                  </a>
+                <a className="nav-link text-info px-0">Pas encore de compte?</a>
+              </Link>
+              <Link href="/account/password-forgot" passHref>
+                <a className="nav-link text-info px-0 ml-auto">Mot de passe oublié?</a>
               </Link>
             </div>
           </div>

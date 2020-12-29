@@ -8,6 +8,7 @@ const Cart = () => {
   const [totalNumberOfArticle,setTotalNumberOfArticle]=useState()
   const [totalPrice,setTotalPrice]=useState()
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
 useEffect(()=>{
     if (process.browser) {
       var cart = JSON.parse(localStorage.getItem("cart"));
@@ -24,18 +25,6 @@ useEffect(()=>{
       });
       setTotalPrice(Number.parseFloat(t2).toFixed(2))
     }
-  /* const totalPrice = () => {
-    if (process.browser) {
-      var cart = JSON.parse(localStorage.getItem("cart"));
-      console.log(cart);
-      var t = 0;
-      cart.map((p) => {
-        const totalOfP = p.price * p.quantityInCart;
-        t += totalOfP;
-      });
-      return Number.parseFloat(t).toFixed(2);
-    }
-  }; */
 },[cart])
   
   return (
@@ -106,7 +95,8 @@ useEffect(()=>{
           }}
         ></div>
       </div>
-      <CartRecap />
+      <div style={{marginBottom:"150px"}}>
+      <CartRecap /></div>
       <div
         className="row m-0 d-flex justify-content-between gradient-for-cart-footer fixed-bottom px-4 pb-5"
         style={{ minHeight: "130px", fontFamily: "Montserrat, sans-serif" }}
@@ -155,7 +145,7 @@ useEffect(()=>{
           </div>
         </div>
         <div>
-          <Link href={"/"} passHref>
+          <Link href={user.token?`/cart/livraison/${user.token}`:"/user/login"} passHref>
             <button className="btn btn-success h-100">
               Valider mon panier
             </button>

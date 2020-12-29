@@ -42,28 +42,37 @@ const PublicProductList = ({ products }) => {
   }, []);
 
   const addToCart = (productToAdd) => (e) => {
-    e.preventDefault();
+    productToAdd.quantityInCart++;
+    e.preventDefault;
     var cart = [];
+
     if (!localStorage.getItem("cart")) {
-      productToAdd.quantityInCart++
+      productToAdd.quantityInCart = 1;
       cart.push(productToAdd);
-      console.log(cart);
       localStorage.setItem("cart", JSON.stringify(cart));
     } else {
       const allProductInCart = localStorage.getItem("cart");
-      JSON.parse(allProductInCart).forEach((p) => {
-        const found=JSON.parse(allProductInCart).find(e=>e._id===p._id)
-        if(found){
-          console.log(found)
-          found.quantityInCart++
-          console.log(found)
-          cart.push(found)
-        }else{
-          cart.push(productToAdd);
-        }
-        //cart.push(p);
-      });
-      
+      const found = JSON.parse(allProductInCart).find(
+        (e) => e._id === productToAdd._id,
+      );
+      if (found) {
+        found.quantityInCart += 1;
+        cart.push(found);
+        JSON.parse(allProductInCart).forEach((p) => {
+          if (p._id !== found._id) {
+            cart.push(p);
+          }
+        });
+      } else {
+        productToAdd.quantityInCart = 1;
+        cart.push(productToAdd);
+        JSON.parse(allProductInCart).forEach((p) => {
+          cart.push(p);
+        });
+      }
+
+      //cart.push(p);
+      console.log(cart);
       localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(cart));
     }

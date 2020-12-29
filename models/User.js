@@ -31,10 +31,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    completed_profile: {
-      type: Boolean,
-      default: false,
-    },
     hashed_password: {
       type: String,
       required: true,

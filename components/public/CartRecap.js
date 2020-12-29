@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { setCart } from "../../redux/actions";
 
 const CartRecap = () => {
-  
   const dispatch = useDispatch();
   const [allProductInCart, setAllProductInCart] = useState();
   const [totalPrice, setTotalPrice] = useState();
@@ -60,9 +59,12 @@ const CartRecap = () => {
           found.quantityInCart += 1;
         } else {
           found.quantityInCart -= 1;
+          if (found.quantityInCart === 0) {
+            console.log("Produit retiré");
+          } else {
+            cart.push(found);
+          }
         }
-
-        cart.push(found);
         JSON.parse(allProductInLocal).forEach((p) => {
           if (p._id !== found._id) {
             cart.push(p);
@@ -95,10 +97,10 @@ const CartRecap = () => {
   };
 
   return (
-    <div className="row mx-0" style={{ marginBottom:"150px!important" }}>
-      {allProductInCart && totalPrice}
+    <div className="row mx-0">
       {allProductInCart &&
         allProductInCart.map((product, i) => (
+          product.quantityInCart!==0 && (
           <div
             key={i}
             className="col-10 my-3 py-2 d-flex mx-auto rounded bg-white"
@@ -193,7 +195,7 @@ const CartRecap = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div>)
         ))}
     </div>
   );

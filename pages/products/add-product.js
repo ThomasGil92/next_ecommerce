@@ -1,16 +1,9 @@
 import Layout from "../../components/Layout";
 import NavBar from "../../components/admin/Navbar";
 import AddProductForm from "../../components/products/AddProductForm";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 const AddProduct = ({ categories }) => {
-  const router = useRouter();
-  /* useEffect(() => {
-    if (!sessionStorage.getItem("admin") || !sessionStorage.getItem("master")) {
-      router.push("/login");
-    }
-  }); */
+ 
 
   return (
     <Layout>
