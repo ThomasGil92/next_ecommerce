@@ -6,7 +6,7 @@ import PublicProductList from "../components/public/PublicProductList";
 export default function Home({ categories,products }) {
   return (
     <Layout>
-      <PublicNavBar />
+      <PublicNavBar products={products} />
       <CategoriesSlider categories={categories} />
       <PublicProductList products={products} />
       {/* to attribute

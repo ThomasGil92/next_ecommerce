@@ -15,8 +15,12 @@ const Login = () => {
   });
   return (
     <Layout>
-      <PublicNavBar />
-      <UserLoginForm />
+      {!userAuth.token && (
+        <>
+          <PublicNavBar />
+          <UserLoginForm />
+        </>
+      )}
     </Layout>
   );
 };

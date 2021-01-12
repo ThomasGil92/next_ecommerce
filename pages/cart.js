@@ -2,31 +2,33 @@ import Layout from "../components/Layout";
 import PublicNavBar from "../components/public/PublicNavBar";
 import CartRecap from "../components/public/CartRecap";
 import Link from "next/link";
-import {useSelector} from 'react-redux'
-import {useEffect,useState} from 'react'
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 const Cart = () => {
-  const [totalNumberOfArticle,setTotalNumberOfArticle]=useState()
-  const [totalPrice,setTotalPrice]=useState()
+  const [totalNumberOfArticle, setTotalNumberOfArticle] = useState();
+  const [totalPrice, setTotalPrice] = useState();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
-useEffect(()=>{
+  useEffect(() => {
     if (process.browser) {
-      var cart = JSON.parse(localStorage.getItem("cart"));
-      var t = 0;
-      cart.map((p) => {
-        t += p.quantityInCart;
-      });
-      setTotalNumberOfArticle(t)
+      if (localStorage.getItem("cart")) {
+        var cart = JSON.parse(localStorage.getItem("cart"));
+        var t = 0;
+        cart.map((p) => {
+          t += p.quantityInCart;
+        });
+        setTotalNumberOfArticle(t);
 
-      var t2=0
-      cart.map((p) => {
-        const totalOfP = p.price * p.quantityInCart;
-        t2 += totalOfP;
-      });
-      setTotalPrice(Number.parseFloat(t2).toFixed(2))
+        var t2 = 0;
+        cart.map((p) => {
+          const totalOfP = p.price * p.quantityInCart;
+          t2 += totalOfP;
+        });
+        setTotalPrice(Number.parseFloat(t2).toFixed(2));
+      }
     }
-},[cart])
-  
+  }, [cart]);
+
   return (
     <Layout>
       <PublicNavBar />
@@ -95,8 +97,9 @@ useEffect(()=>{
           }}
         ></div>
       </div>
-      <div style={{marginBottom:"150px"}}>
-      <CartRecap /></div>
+      <div style={{ marginBottom: "150px" }}>
+        <CartRecap />
+      </div>
       <div
         className="row m-0 d-flex justify-content-between gradient-for-cart-footer fixed-bottom px-4 pb-5"
         style={{ minHeight: "130px", fontFamily: "Montserrat, sans-serif" }}
@@ -145,7 +148,10 @@ useEffect(()=>{
           </div>
         </div>
         <div>
-          <Link href={user.token?`/cart/livraison/${user.token}`:"/user/login"} passHref>
+          <Link
+            href={user.token ? `/cart/livraison/${user.token}` : "/user/login"}
+            passHref
+          >
             <button className="btn btn-success h-100">
               Valider mon panier
             </button>

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
