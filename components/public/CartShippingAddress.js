@@ -8,6 +8,7 @@ const CartShippingAddress = ({ infos, token, setAddress }) => {
     e.preventDefault();
     setAddress(infos);
   };
+  console.log(infos)
   return (
     
       <div
@@ -31,7 +32,7 @@ const CartShippingAddress = ({ infos, token, setAddress }) => {
           </p>
         </div>
         <div className="col-12 d-flex px-0 mt-3">
-          <Link href={`/user/update-address/[id]`} as={`/user/update-address/${user.user._id}`}>
+          <Link href={`/user/update-address/[id]`} as={`/user/update-address/${infos._id}`}>
             <button
               className="col-6 btn btn-outline-danger"
               style={{ borderRadius: "0 0 0 20px" }}

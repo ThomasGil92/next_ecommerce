@@ -1,6 +1,7 @@
 export const SET_ADMIN = "SET_ADMIN";
 export const SET_USER = "SET_USER";
 export const SET_CART = "SET_CART";
+export const CLEAR_CART = "CLEAR_CART";
 
 export const setAdmin = () => (dispatch) => {
   if (process.browser) {
@@ -36,6 +37,13 @@ export const setCart = () => (dispatch) => {
       payload: JSON.parse(localStorage["cart"]),
     });
   }
+};
+
+export const clearCart = () => (dispatch) => {
+    dispatch({
+      type: CLEAR_CART,
+      payload:''
+    });
 };
 
 export const clearAdmin = () => (dispatch) => {

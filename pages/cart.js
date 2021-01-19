@@ -4,7 +4,7 @@ import CartRecap from "../components/public/CartRecap";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-const Cart = () => {
+const Cart = ({products}) => {
   const [totalNumberOfArticle, setTotalNumberOfArticle] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const cart = useSelector((state) => state.cart);
@@ -31,7 +31,7 @@ const Cart = () => {
 
   return (
     <Layout>
-      <PublicNavBar />
+      <PublicNavBar products={products} />
       <div className="row flex-column mt-5 pt-3 mx-0 bg-third">
         <div className="col-6 py-3 mx-auto d-flex justify-content-between">
           <div
@@ -162,3 +162,10 @@ const Cart = () => {
   );
 };
 export default Cart;
+export async function getServerSideProps(context) {
+  const productsUrl = await fetch("http://localhost:3000/api/product/get");
+  const products = await productsUrl.json();
+
+  return { props: {products } };
+}
+

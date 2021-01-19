@@ -14,6 +14,7 @@ console.log(id)
       try {
         const user = await User.findById({_id:id});
         const {
+          _id,
           email,
           address,
           first_name,
@@ -27,6 +28,7 @@ console.log(id)
           success: true,
           data: {
             user: {
+              _id,
               email,
               address,
               first_name,

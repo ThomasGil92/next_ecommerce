@@ -8,16 +8,19 @@ const CartRecap = () => {
   const [totalPrice, setTotalPrice] = useState();
 
   useEffect(() => {
-    var cart = JSON.parse(localStorage.getItem("cart"));
-    console.log(cart);
-    setAllProductInCart(cart);
-    var t = 0;
-    cart.map((p) => {
-      const totalOfP = p.price * p.quantityInCart;
-      t += totalOfP;
-    });
-    setTotalPrice(Number.parseFloat(t).toFixed(2));
-  }, [allProductInCart]);
+    if (localStorage.getItem("cart")) {
+      var cart = JSON.parse(localStorage.getItem("cart"));
+      console.log(cart);
+      setAllProductInCart(cart);
+      var t = 0;
+
+      cart.map((p) => {
+        const totalOfP = p.price * p.quantityInCart;
+        t += totalOfP;
+      });
+      setTotalPrice(Number.parseFloat(t).toFixed(2));
+    }
+  }, [setCart]);
 
   const total = (product) => {
     var t = product.price * product.quantityInCart;
@@ -36,7 +39,7 @@ const CartRecap = () => {
     return Number.parseFloat(t).toFixed(2);
   };
 
-  const addToCart = (productToAdd, operation) => (e) => {
+  const addToCart = (productToAdd, operation, id) => (e) => {
     e.preventDefault();
     /* if (operation === "add") {
       productToAdd.quantityInCart++;
@@ -86,22 +89,20 @@ const CartRecap = () => {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
     dispatch(setCart());
-    /* const tToUpdate = document.getElementById(
-      `${productToAdd.price + productToAdd._id}`,
-    );
-    tToUpdate.textContent = `${total(productToAdd)} `; */
-
     const tIndicator = document.getElementById(`${productToAdd._id}`);
-    if(operation==="add"){
+    if (operation === "add") {
       tIndicator.textContent++;
     }
-    if(operation==="remove"){
+    if (operation === "remove") {
       tIndicator.textContent--;
     }
-    
+    if (tIndicator.textContent <= 0) {
+      const elm = document.getElementById(`${id}`);
+      console.log(elm);
+      elm.remove();
+    }
 
     setTotalPrice(totalCart());
-    console.log(totalCart());
   };
 
   return (
@@ -111,6 +112,7 @@ const CartRecap = () => {
           (product, i) =>
             product.quantityInCart !== 0 && (
               <div
+                id={i}
                 key={i}
                 className="col-10 my-3 py-2 d-flex mx-auto rounded bg-white"
               >
@@ -146,7 +148,7 @@ const CartRecap = () => {
                     <button
                       type="button"
                       className="btn bg-third text-dark"
-                      onClick={addToCart(product, "remove")}
+                      onClick={addToCart(product, "remove", i)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +184,7 @@ const CartRecap = () => {
                     <button
                       type="button"
                       className="btn bg-third text-dark"
-                      onClick={addToCart(product, "add")}
+                      onClick={addToCart(product, "add", i)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -1,27 +1,51 @@
 import Layout from "../../components/Layout";
 import PublicNavBar from "../../components/public/PublicNavBar";
+import {useDispatch} from 'react-redux'
+import {clearCart} from '../../redux/actions'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { loadStripe } from "@stripe/stripe-js";
 const success = () => {
   const [products, setProducts] = useState();
   const [subTotal, setSubTotal] = useState();
+  const [cs, setCs] = useState();
   const router = useRouter();
+  const dispatch=useDispatch()
   useEffect(() => {
     let sub_total = 0;
     if (process.browser) {
       if (localStorage.getItem("cart")) {
         var cart = JSON.parse(localStorage.getItem("cart"));
         setProducts(cart);
-
+        const user = JSON.parse(sessionStorage.getItem("user")).user;
         cart.forEach((product) => {
           var q = 0;
           q += product.quantityInCart;
           sub_total += q * product.price;
         });
         setSubTotal(Number.parseFloat(sub_total).toFixed(2));
-        console.log(subTotal);
+        const cs = JSON.parse(localStorage.getItem("session"));
+        const id = cs.data.id;
+        async function retrieve() {
+          const res = await fetch(`/api/checkout/${id}`);
+          const { session } = await res.json();
+          console.log(session);
+          setCs(session);
+        }
+        async function mailConfirmation() {
+          const response = await axios.post(`/api/user/checkout-success`, {
+            user,
+            cs,
+          });
+        }
+        retrieve().then((session) => {
+          mailConfirmation();
+        });
+
         localStorage.removeItem("cart");
+        dispatch(clearCart())
       } else {
         router.push("/");
       }

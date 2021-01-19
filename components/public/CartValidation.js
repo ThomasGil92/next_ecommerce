@@ -22,6 +22,7 @@ const CartValidation = ({ address, total }) => {
       total,
       address,
     });
+    localStorage.setItem("session", JSON.stringify(response));
     const session = await response;
 
     // When the customer clicks on the button, redirect them to Checkout.
