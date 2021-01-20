@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import PublicNavBar from "../../components/public/PublicNavBar";
-import {useDispatch} from 'react-redux'
-import {clearCart} from '../../redux/actions'
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -12,7 +12,7 @@ const success = () => {
   const [subTotal, setSubTotal] = useState();
   const [cs, setCs] = useState();
   const router = useRouter();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     let sub_total = 0;
     if (process.browser) {
@@ -31,7 +31,6 @@ const success = () => {
         async function retrieve() {
           const res = await fetch(`/api/checkout/${id}`);
           const { session } = await res.json();
-          console.log(session);
           setCs(session);
         }
         async function mailConfirmation() {
@@ -40,12 +39,25 @@ const success = () => {
             cs,
           });
         }
+
+        async function createOrder() {
+          const response = await axios.post(`/api/orders`, {
+            user,
+            cart,
+            sub_total,
+          });
+        }
+
         retrieve().then((session) => {
-          mailConfirmation();
+          mailConfirmation().then((res) => {
+            createOrder().then(response=>{
+ localStorage.removeItem("cart");
+            })
+          });
         });
 
-        localStorage.removeItem("cart");
-        dispatch(clearCart())
+       
+        dispatch(clearCart());
       } else {
         router.push("/");
       }
