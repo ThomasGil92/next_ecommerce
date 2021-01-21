@@ -142,9 +142,10 @@ const PublicNavBar = ({ products }) => {
                         Another action
                       </a>
                       <div className="dropdown-divider"></div>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
+                      <Link href={`/user/profile/${userAuth.user._id}`} passHref>
+                        <a className="dropdown-item">Mon compte</a>
+                      </Link>
+
                       <button
                         title="Se déconnecter"
                         className="btn btn-link text-danger dropdown-item"

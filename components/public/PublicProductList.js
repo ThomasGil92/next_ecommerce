@@ -78,7 +78,7 @@ const PublicProductList = ({ products }) => {
   };
 
   return (
-    <div className="mt-5 mx-0 text-center bg-third">
+    <div className="mt-5 mx-0 text-center bg-third pb-5">
       <h2>Tous nos produits</h2>
       <div className="container-fluid">
         <div className="row mx-0 mt-4">

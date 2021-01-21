@@ -20,7 +20,7 @@ const ProductsSideBar = ({
 
   return (
     <div
-      className="col-2 bg-secondary position-absolute vh-100 px-0"
+      className="col-2 bg-secondary position-absolute h-100 px-0"
       style={{ top: 0,zIndex:"6" }}
     >
       <ul className="nav flex-column mt-5 pt-3">

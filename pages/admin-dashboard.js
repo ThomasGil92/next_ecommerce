@@ -63,12 +63,14 @@ const AdminDashboard = ({ orders }) => {
                             Pays: {order.shipping_address.country}
                           </p>
                         </div>
-                        <div className="col-3 text-right">
+                        <div className="col-3 text-right d-flex flex-column justify-content-between">
                           <div>
                             Status:{" "}
                             {order.state === "UNCHECKED" && "Non validé"}
-                            {order.state === "CHECKED" && "Validé"}
+                            {order.state === "VALIDATED" && "Validé"}
+                            {order.state === "SENT" && "Envoyée"}
                           </div>
+                          <div >Total: {order.ordered_objects.price} &euro;</div>
                         </div>
                       </div>
                     );

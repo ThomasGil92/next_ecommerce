@@ -3,7 +3,7 @@ import Product from "../../../models/Product";
 
 export default async function handler(req, res) {
   const { method } = req;
-  const { _id, stock,description,price,productName } = req.body.toUpdate;
+  const { _id, stock,description,price,productName } = req.body;
 
   await dbConnect();
 
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
           }
 
           return res.status(200).json({
-            product,
+           data: product,
           });
         });
       } catch ({ error }) {

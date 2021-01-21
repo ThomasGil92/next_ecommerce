@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import ProductNavbar from "./ProductNavbar";
+import { mutate } from "swr";
 
 const ProductsList = ({ products, categories }) => {
   const router = useRouter();
@@ -36,9 +37,23 @@ const ProductsList = ({ products, categories }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`/api/product/update`, {
-        toUpdate,
+      //const id = userId.user._id;
+      const response = await fetch(`/api/product/update`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(toUpdate),
       });
+      const { data } = await response;
+      mutate(`/api/product/update`, data, false); // Update the local data without a revalidation
+
+      //router.push(`/cart/livraison/${userId.token}`);
+
+      /*  const response = await axios.put(`/api/product/update`, {
+        toUpdate,
+      });*/
       router.reload(window.location.pathname);
     } catch (error) {
       console.log(error);
@@ -52,7 +67,7 @@ const ProductsList = ({ products, categories }) => {
         setSelectedCategory={setSelectedCategory}
         categories={categories}
       />
-      <div className="table-responsive-lg">
+      <div className="table-responsive-lg pb-4">
         <table className="table table-hover">
           <thead className="thead-dark">
             <tr className="d-flex">
@@ -66,9 +81,9 @@ const ProductsList = ({ products, categories }) => {
           <tbody>
             {products &&
               products.products.map((product) => {
-                return selectedCategory.categorie ==="" ? (
+                return selectedCategory.categorie === "" ? (
                   <tr
-                  style={{cursor:"pointer"}}
+                    style={{ cursor: "pointer" }}
                     data-toggle="modal"
                     title="Modifier"
                     data-target="#exampleModal"

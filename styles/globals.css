@@ -11,6 +11,10 @@ body {
 a.btn.btn-link {
   height: 40px;
 }
+.profile-hover-color:hover{
+  background-color:#e6e6e6;
+  cursor:pointer;
+}
 a {
   color: inherit;
   text-decoration: none;

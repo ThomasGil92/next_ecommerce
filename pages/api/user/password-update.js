@@ -32,7 +32,7 @@ export default async function handler(req, res) {
                 console.log(result);
               });
             });
-            return res.status(200).json("Password updated");
+            return res.status(200).json({message:"Password updated"});
           },
         );
       } catch ({ error }) {
