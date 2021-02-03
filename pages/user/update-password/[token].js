@@ -5,7 +5,7 @@ import PublicNavBar from "../../../components/public/PublicNavBar";
 import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import { useSelector } from "react-redux";
-import {mutate} from 'swr'
+import { mutate } from "swr";
 
 const UpdatePassword = () => {
   const userAuth = useSelector((state) => state.user);
@@ -25,6 +25,7 @@ const UpdatePassword = () => {
     }
     if (token) {
       const { email } = jwt.decode(token);
+      console.log(email)
       setState({
         ...state,
         email,
@@ -37,18 +38,23 @@ const UpdatePassword = () => {
   };
 
   const updatePassword = async (e) => {
+    e.preventDefault()
     try {
-      const response = await fetch(`/api/user/password-update`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      const response = await axios.put(
+        `${process.env.REST_API}/api/user/password-update`,
+        {
+          state,
+          token,
         },
-        body: JSON.stringify(state, token),
-      })
+      );
+      console.log("state&co:", state,token)
       const { message } = await response;
-      mutate(`/api/user/password-update`, message, false);
-      window.location.replace("http://localhost:3000/user/login");
+      mutate(
+        `${process.env.REST_API}/api/user/password-update`,
+        message,
+        false,
+      );
+      router.push('/user/login');
     } catch (error) {
       setState({ ...state, error: error });
       console.log(error);

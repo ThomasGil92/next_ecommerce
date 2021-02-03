@@ -15,7 +15,7 @@ const ProductNavbar = ({
         <select className="custom-select" onChange={handleSelect}>
           <option selected></option>
           {categories &&
-            categories.categories.map((category) => {
+            categories.map((category) => {
               return (
                 <option key={category._id} value={category._id}>
                   {category.categoryName}

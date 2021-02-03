@@ -7,33 +7,23 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
 
-const Livraison = ({ userInfos }) => {
+const Livraison = ({ user }) => {
   const [address, setAddress] = useState();
   const [totalPrice, setTotalPrice] = useState();
-  const user = useSelector((state) => state.user);
+  //const user = useSelector((state) => state.user);
   const router = useRouter();
 
   useEffect(() => {
-    var cart = JSON.parse(localStorage.getItem("cart"));
-    var t = 0;
-    cart.map((p) => {
-      const totalOfP = p.price * p.quantityInCart;
-      t += totalOfP;
-    });
-    setTotalPrice(Number.parseFloat(t).toFixed(2));
-  }, []);
-
-  /* const totalCart = () => {
-    var t = 0;
-    if (allProductInCart) {
-      allProductInCart.map((p) => {
+    if (localStorage.getItem("cart")) {
+      var cart = JSON.parse(localStorage.getItem("cart"));
+      var t = 0;
+      cart.map((p) => {
         const totalOfP = p.price * p.quantityInCart;
         t += totalOfP;
       });
+      setTotalPrice(Number.parseFloat(t).toFixed(2));
     }
-    //setTotalPrice(Number.parseFloat(t).toFixed(2));
-    return Number.parseFloat(t).toFixed(2);
-  }; */
+  }, []);
   return (
     <Layout>
       <PublicNavBar />
@@ -115,7 +105,7 @@ const Livraison = ({ userInfos }) => {
         <div className="col-12 d-flex justify-content-between mx-0 px-5">
           <CartShippingAddress
             setAddress={setAddress}
-            infos={userInfos.data.user}
+            infos={user.user}
             token={router.query.token}
           />
           <CartValidation address={address} total={totalPrice} />
@@ -124,12 +114,17 @@ const Livraison = ({ userInfos }) => {
     </Layout>
   );
 };
-export async function getServerSideProps({ params }) {
-  const token = params.token;
-  const { _id } = jwt.decode(token);
-  const userUrl = await fetch(`http://localhost:3000/api/user/get/${_id}`);
-  const userInfos = await userUrl.json();
-  console.log(userInfos);
-  return { props: { userInfos } };
-}
 export default Livraison;
+
+export async function getServerSideProps(context) {
+  /*  const token = params.token;
+  console.log("context",context)
+  
+ 
+  console.log(id) */
+  const { id } = context.query
+  console.log(context.query)
+  const userUrl = await fetch(`${process.env.REST_API}/api/user/get/${id}`);
+  const user = await userUrl.json();
+  return { props: { user } };
+}

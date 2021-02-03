@@ -38,22 +38,15 @@ const ProductsList = ({ products, categories }) => {
     e.preventDefault();
     try {
       //const id = userId.user._id;
-      const response = await fetch(`/api/product/update`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      const response = await axios.put(
+        `${process.env.REST_API}/api/product/update`,
+        {
+          toUpdate,
         },
-        body: JSON.stringify(toUpdate),
-      });
+      );
       const { data } = await response;
-      mutate(`/api/product/update`, data, false); // Update the local data without a revalidation
+      mutate(`${process.env.REST_API}/api/product/update`, data, false); // Update the local data without a revalidation
 
-      //router.push(`/cart/livraison/${userId.token}`);
-
-      /*  const response = await axios.put(`/api/product/update`, {
-        toUpdate,
-      });*/
       router.reload(window.location.pathname);
     } catch (error) {
       console.log(error);
@@ -61,7 +54,7 @@ const ProductsList = ({ products, categories }) => {
   };
 
   return (
-    <div className="col-10 offset-2 p-0">
+    <div className="col-10 mt-5 pt-3 offset-2 p-0">
       <ProductNavbar
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
@@ -80,7 +73,7 @@ const ProductsList = ({ products, categories }) => {
           </thead>
           <tbody>
             {products &&
-              products.products.map((product) => {
+              products.map((product) => {
                 return selectedCategory.categorie === "" ? (
                   <tr
                     style={{ cursor: "pointer" }}

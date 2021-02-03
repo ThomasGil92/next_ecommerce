@@ -48,7 +48,7 @@ useEffect(()=>{
     setState({ ...state, buttonText: "Logging in" });
     setClicked(true)
     try {
-      const response = await axios.post(`/api/login/admin`, {
+      const response = await axios.post(`${process.env.REST_API}/api/admin/adminSignin`, {
         email,
         password,
       });

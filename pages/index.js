@@ -16,9 +16,9 @@ export default function Home({ categories,products }) {
   );
 }
 export async function getServerSideProps(context) {
-  const categoriesUrl = await fetch("http://localhost:3000/api/categorie/get");
+  const categoriesUrl = await fetch(`${process.env.REST_API}/api/categories/get`);
   const categories = await categoriesUrl.json();
-  const productsUrl = await fetch("http://localhost:3000/api/product/get");
+  const productsUrl = await fetch(`${process.env.REST_API}/api/product/get`);
   const products = await productsUrl.json();
 
   return { props: { categories,products } };

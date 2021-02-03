@@ -22,7 +22,7 @@ const ProfileForm = ({ userEmail, userName, query }) => {
     try {
       if (email !== "" && name !== "") {
         if (email !== userEmail || name !== userName) {
-          const response = await axios.put(`/api/admin/update-email`, {
+          const response = await axios.put(`${process.env.REST_API}/api/admin/updateEmail`, {
             profile,
           });
           console.log(response);
@@ -31,7 +31,7 @@ const ProfileForm = ({ userEmail, userName, query }) => {
           // console.log('account activate response', response)
         }
         if (password !== "") {
-          const response = await axios.put(`/api/admin/update-password`, {
+          const response = await axios.put(`${process.env.REST_API}/api/admin/updatePassword`, {
             profile,
           });
           console.log(response);

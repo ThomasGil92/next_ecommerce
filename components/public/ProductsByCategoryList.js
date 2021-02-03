@@ -83,7 +83,7 @@ const PublicProductList = ({ products }) => {
       <div className="container-fluid">
         <div className="row mx-0 mt-4">
           {products &&
-            products.products.map((product, i) => {
+            products.map((product, i) => {
               return (
                 product.categorie._id === categoryId && (
                   <div key={i} className="col-md-3">

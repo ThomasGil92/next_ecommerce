@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 
 export default async function handler(req, res) {
   const { method } = req;
-  const { token } = req.body;
 
   await dbConnect();
 

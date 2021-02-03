@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const { method } = req;
   const { email, password } = req.body.state;
   await dbConnect();
-
+console.log(req.body)
   switch (method) {
     case "PUT":
       try {

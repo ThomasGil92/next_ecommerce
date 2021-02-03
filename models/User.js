@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+var mongoose = require("mongoose"),
+  Schema = mongoose.Schema,
+  { ObjectId } = mongoose.Schema;
 const crypto = require("crypto");
-
 const userSchema = new mongoose.Schema(
   {
     first_name: {
@@ -40,6 +41,12 @@ const userSchema = new mongoose.Schema(
       data: String,
       default: "",
     },
+    orders: [
+      {
+        type: ObjectId,
+        ref: "Order",
+      },
+    ],
   },
   {
     timestamps: true,

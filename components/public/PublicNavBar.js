@@ -120,11 +120,10 @@ const PublicNavBar = ({ products }) => {
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item dropdown mr-2 d-flex align-items-center">
                     <a
-                      className="nav-link dropdown-toggle text-dark"
-                      href="#"
-                      id="navbarDropdown"
-                      role="button"
+                      className="btn dropdown-toggle text-dark"
+                      type="button"
                       data-toggle="dropdown"
+                      id="navbarDropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
@@ -142,7 +141,10 @@ const PublicNavBar = ({ products }) => {
                         Another action
                       </a>
                       <div className="dropdown-divider"></div>
-                      <Link href={`/user/profile/${userAuth.user._id}`} passHref>
+                      <Link
+                        href={`/user/profile/${userAuth.user._id}`}
+                        passHref
+                      >
                         <a className="dropdown-item">Mon compte</a>
                       </Link>
 

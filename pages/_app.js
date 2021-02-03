@@ -1,6 +1,7 @@
 import { Provider } from "react-redux";
 import { useStore } from "../store";
 import App from "next/app";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/globals.css";
 /* import { setAdmin } from "../redux/actions"; */
 

@@ -83,7 +83,7 @@ const PublicProductList = ({ products }) => {
       <div className="container-fluid">
         <div className="row mx-0 mt-4">
           {products &&
-            products.products.map((product, i) => {
+            products.map((product, i) => {
               return (
                 <div key={i} className="col-md-3">
                   <div
@@ -95,11 +95,12 @@ const PublicProductList = ({ products }) => {
                     }}
                   >
                     <img
+                    loading="lazy"
                       data-toggle="modal"
                       data-target="#exampleModal"
                       data-whatever={JSON.stringify(product)}
-                      src={product.imageUrl}
-                      className="card-img-top"
+                      data-src={product.imageUrl}
+                      className="card-img-top lazyload"
                       alt={product.productName}
                       style={{
                         cursor: "pointer",
@@ -179,7 +180,7 @@ const PublicProductList = ({ products }) => {
                 </div>
               </div>
               <div className="modal-body text-left">
-                <img src={imageUrl} />
+                <img /* className="lazyload" */ src={imageUrl} />
                 <div className="text-left mt-4">
                   <h4>
                     {productName.charAt(0).toUpperCase() + productName.slice(1)}

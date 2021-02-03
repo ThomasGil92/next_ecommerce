@@ -18,10 +18,13 @@ const CartValidation = ({ address, total }) => {
     // Get Stripe.js instance
     const stripe = await stripePromise;
     // Call your backend to create the Checkout Session
-    const response = await axios.post("/api/checkout/create-session", {
-      total,
-      address,
-    });
+    const response = await axios.post(
+      `${process.env.REST_API}/api/checkout/createSession`,
+      {
+        total,
+        address,
+      },
+    );
     localStorage.setItem("session", JSON.stringify(response));
     const session = await response;
 

@@ -14,7 +14,7 @@ const AddCategoriesForm = () => {
   const handleChange = (name) => (e) => {
     setCategorieFields({ ...categorieFields, [name]: e.target.value });
   };
-  
+
   const handleChangeImage = async (e) => {
     const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
@@ -44,9 +44,12 @@ const AddCategoriesForm = () => {
     e.preventDefault();
     try {
       if (categoryName !== "") {
-        const response = await axios.post(`/api/categorie/add`, {
-          categorieFields,
-        });
+        const response = await axios.post(
+          `${process.env.REST_API}/api/categorie/add`,
+          {
+            categorieFields,
+          },
+        );
         console.log(response);
       }
 

@@ -30,7 +30,7 @@ const handleClick=category=>e=>{
           </Link>
         </li>
         {/* {categories && JSON.stringify(categories)} */}
-        {categories && categories.categories.map((category) => {
+        {categories && categories.map((category) => {
             return (
               <li key={category._id} className="nav-item border-bottom">
                 <a onClick={handleClick(category)} id={category._id} className="nav-link text-white active">{category.categoryName}</a>

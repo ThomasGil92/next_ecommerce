@@ -31,7 +31,7 @@ const searchResult = ({ products, query }) => {
   } = selectedProduct;
   useEffect(() => {
     if (products) {
-      const filtered = products.products.filter((product) => {
+      const filtered = products.filter((product) => {
         return product.productName.toLowerCase().includes(query.toLowerCase());
       });
       console.log(filtered);
@@ -234,7 +234,7 @@ export default searchResult;
 
 export async function getServerSideProps(context) {
   const query = context.query.product_terms;
-  const productsUrl = await fetch("http://localhost:3000/api/product/get");
+  const productsUrl = await fetch(`${process.env.REST_API}/api/product/get`);
   const products = await productsUrl.json();
 
   return { props: { products, query } };

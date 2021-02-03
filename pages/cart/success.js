@@ -5,8 +5,7 @@ import { clearCart } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { loadStripe } from "@stripe/stripe-js";
+import Link from "next/link";
 const success = () => {
   const [products, setProducts] = useState();
   const [subTotal, setSubTotal] = useState();
@@ -29,34 +28,41 @@ const success = () => {
         const cs = JSON.parse(localStorage.getItem("session"));
         const id = cs.data.id;
         async function retrieve() {
-          const res = await fetch(`/api/checkout/${id}`);
+          const res = await fetch(
+            `${process.env.REST_API}/api/checkout/session/${id}`,
+          );
           const { session } = await res.json();
           setCs(session);
         }
         async function mailConfirmation() {
-          const response = await axios.post(`/api/user/checkout-success`, {
-            user,
-            cs,
-          });
+          const response = await axios.post(
+            `${process.env.REST_API}/api/checkout/session/emailSuccess`,
+            {
+              user,
+              cs,
+            },
+          );
         }
 
         async function createOrder() {
-          const response = await axios.post(`/api/orders`, {
-            user,
-            cart,
-            sub_total,
-          });
+          const response = await axios.post(
+            `${process.env.REST_API}/api/orders/saveNewOrder`,
+            {
+              user,
+              cart,
+              sub_total,
+            },
+          );
         }
 
         retrieve().then((session) => {
           mailConfirmation().then((res) => {
-            createOrder().then(response=>{
- localStorage.removeItem("cart");
-            })
+            createOrder().then((response) => {
+              localStorage.removeItem("cart");
+            });
           });
         });
 
-       
         dispatch(clearCart());
       } else {
         router.push("/");
@@ -183,6 +189,9 @@ const success = () => {
               </div>
             </div>
           </div>
+          <Link href="/" passHref>
+            <a className="nav-link">Retour à l'accueil</a>
+          </Link>
         </div>
       </div>
     </Layout>

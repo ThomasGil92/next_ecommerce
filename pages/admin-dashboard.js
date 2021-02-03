@@ -14,7 +14,7 @@ const AdminDashboard = ({ orders }) => {
 
   useEffect(() => {
     if (!sessionStorage.getItem("admin") && !sessionStorage.getItem("master")) {
-      router.push("/login");
+      router.push("/login-admin");
     } else {
       setTimeout(function () {
         setLoading(false);
@@ -31,12 +31,12 @@ const AdminDashboard = ({ orders }) => {
           <NavBar />
           <div className="row p-0 m-0">
             <SideBar setSelectedOrders={setSelectedOrders} />
-            <div className="text-center col-10">
+            <div className="text-center col-md-10 offset-md-2 mt-5 mb-2 py-4">
               <h1>{isAuth.admin && isAuth.admin.name}</h1>
               <div className="row mt-5">
                 {orders &&
                   selectedOrders &&
-                  orders.orders.map((order, i) => {
+                  orders.map((order, i) => {
                     return (
                       <div
                         key={i}
@@ -87,7 +87,7 @@ const AdminDashboard = ({ orders }) => {
 export default AdminDashboard;
 
 export async function getServerSideProps(context) {
-  const ordersUrl = await fetch("http://localhost:3000/api/orders");
+  const ordersUrl = await fetch(`${process.env.REST_API}/api/orders/get`);
   const orders = await ordersUrl.json();
 
   return { props: { orders } };

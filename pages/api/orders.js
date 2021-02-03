@@ -5,26 +5,18 @@ import User from "../../models/User";
 
 export default async function handler(req, res) {
   const { method } = req;
-  console.log(req.body);
 
   await dbConnect();
 
   switch (method) {
     case "POST":
       try {
-        Admin.findOne({role:1}).exec((err, admin) => {
-          if (!admin) {
-            return res.status(401).json({
-              error: "Please try again",
-            });
-          }
           User.findById(req.body.user._id).exec((err, user) => {
             if (!user) {
               return res.status(401).json({
                 error: "Please try again",
               });
             }
-            
 
             const newOrder = new Order({
               shipping_address: {
@@ -37,35 +29,40 @@ export default async function handler(req, res) {
                 email: user.email,
               },
               ordered_objects: {
-                list:  req.body.cart ,
-                price:Number.parseFloat(req.body.sub_total).toFixed(2)
+                list: req.body.cart,
+                price: Number.parseFloat(req.body.sub_total).toFixed(2),
               },
             });
-            console.log("admin:",admin);
-            console.log("user:",user);
-            console.log("newOrder:", newOrder);
             newOrder.save((err, result) => {
               if (err) {
                 return res.status(401).json({
                   error: err,
                 });
               }
+              user.orders.push(result._id);
+              user.save((err, userUpdated) => {
+                if (err) {
+                  return res.status(401).json({
+                    error: err,
+                  });
+                }
+                console.log(userUpdated);
+              });
               return res.status(200).json({
                 message: "Order have been successfully saved.",
               });
             });
           });
-        });
       } catch ({ error, message }) {
         res.status(400).json({ error, message });
       }
       break;
-      case "GET":
+    case "GET":
       try {
         const orders = await Order.find({});
-        res.status(200).json({ success: true,orders });
+        res.status(200).json({ success: true, orders });
       } catch ({ error, message }) {
-        res.status(400).json({ error, message:"Aucun produit trouvé" });
+        res.status(400).json({ error, message: "Aucun produit trouvé" });
       }
       break;
     default:

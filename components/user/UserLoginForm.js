@@ -32,10 +32,13 @@ const UserLoginForm = () => {
     setCompleted(false);
     setUserFields({ ...userFields, buttonText: "Tentative de connection" });
     try {
-      const response = await axios.post(`/api/login/user`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REST_API}/api/login/user`,
+        {
+          email,
+          password,
+        },
+      );
       console.log(response); // data > token / user
       sessionStorage.setItem("user", JSON.stringify(response.data));
       dispatch(setUser());
@@ -100,7 +103,9 @@ const UserLoginForm = () => {
                 <a className="nav-link text-info px-0">Pas encore de compte?</a>
               </Link>
               <Link href="/account/password-forgot" passHref>
-                <a className="nav-link text-info px-0 ml-auto">Mot de passe oublié?</a>
+                <a className="nav-link text-info px-0 ml-auto">
+                  Mot de passe oublié?
+                </a>
               </Link>
             </div>
           </div>

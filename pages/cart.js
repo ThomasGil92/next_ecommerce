@@ -149,7 +149,7 @@ const Cart = ({products}) => {
         </div>
         <div>
           <Link
-            href={user.token ? `/cart/livraison/${user.token}` : "/user/login"}
+            href={user.user ? `/cart/livraison/${user.user._id}` : "/user/login"}
             passHref
           >
             <button className="btn btn-success h-100">
@@ -163,7 +163,7 @@ const Cart = ({products}) => {
 };
 export default Cart;
 export async function getServerSideProps(context) {
-  const productsUrl = await fetch("http://localhost:3000/api/product/get");
+  const productsUrl = await fetch(`${process.env.REST_API}/api/categories/get`);
   const products = await productsUrl.json();
 
   return { props: {products } };

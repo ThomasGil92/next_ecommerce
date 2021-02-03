@@ -3,8 +3,24 @@ import { useEffect } from "react";
 import PublicNavBar from "../../../components/public/PublicNavBar";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import {useRouter} from 'next/router'
+import {useSelector} from 'react-redux'
 
 const UserProfile = ({ user }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if(process.browser){
+      if(sessionStorage.getItem("user")){
+        const userInSession=JSON.parse(sessionStorage.getItem("user"))
+        console.log(router.query)
+        if(userInSession.user._id!==router.query.id){
+          router.push("/user/login")
+        }
+      }
+    }
+  });
+  
   return (
     <Layout>
       <PublicNavBar />
@@ -12,7 +28,7 @@ const UserProfile = ({ user }) => {
         <div className="col-9 mx-auto">
           <h4 className="mb-4">Votre compte</h4>
           <div className="row m-0 justify-content-around">
-            <Link href={`/user/profile/commandes/${user.data.user._id}`}>
+            <Link href={`/user/profile/commandes/${user.user._id}`}>
               <motion.div className="col-4 profile-hover-color border d-flex align-items-center py-2">
                 <div className="col-3 text-center">
                   <svg
@@ -35,10 +51,8 @@ const UserProfile = ({ user }) => {
                 </div>
               </motion.div>
             </Link>
-            <Link href={`/user/update-address/${user.data.user._id}`}>
-              <motion.div
-                className="col-4 profile-hover-color border d-flex align-items-center py-2"
-              >
+            <Link href={`/user/update-address/${user.user._id}`}>
+              <motion.div className="col-4 profile-hover-color border d-flex align-items-center py-2">
                 <div className="col-3 text-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +85,7 @@ export default UserProfile;
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const userUrl = await fetch(`http://localhost:3000/api/user/get/${id}`);
+  const userUrl = await fetch(`${process.env.REST_API}/api/user/get/${id}`);
   const user = await userUrl.json();
   return { props: { user } };
 }

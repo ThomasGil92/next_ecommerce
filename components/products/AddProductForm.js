@@ -66,7 +66,7 @@ const AddProductForm = ({ categories }) => {
         stock !== "" &&
         categorie !== ""
       ) {
-        const response = await axios.post(`/api/product/add`, {
+        const response = await axios.post(`${process.env.REST_API}/api/product/add`, {
           productFields,
         });
       }
@@ -128,7 +128,7 @@ const AddProductForm = ({ categories }) => {
           >
             <option selected>Choisissez une catégorie de produits</option>
             {categories &&
-              categories.categories.map((categorie) => {
+              categories.map((categorie) => {
                 return (
                   <option key={categorie._id} value={categorie._id}>
                     {categorie.categoryName}

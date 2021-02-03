@@ -14,7 +14,7 @@ const Products = ({ categories, products }) => {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showCategories, setShowCategories] = useState(false);
-  const [showProductsList, setShowProductsList] = useState(false)
+  const [showProductsList, setShowProductsList] = useState(false);
   const isAuth = useSelector((state) => state.admin);
 
   useEffect(() => {
@@ -73,12 +73,12 @@ const Products = ({ categories, products }) => {
   );
 };
 export async function getServerSideProps(context) {
-  const categoriesUrl = await fetch("http://localhost:3000/api/categorie/get");
-  const productsUrl = await fetch("http://localhost:3000/api/product/get");
-  /* const productsUrl = "http://localhost:3000/api/product/get"; */
-  const categories = await categoriesUrl.json();
+  const categoriesUrl = await fetch(
+    `${process.env.REST_API}/api/categories/get`,
+  );
+  const productsUrl = await fetch(`${process.env.REST_API}/api/product/get`);
+ const categories = await categoriesUrl.json();
   const products = await productsUrl.json();
-  /* const { data } = await axios.get(categoriesUrl); */
 
   return { props: { categories, products } };
 }

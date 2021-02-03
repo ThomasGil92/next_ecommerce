@@ -24,7 +24,7 @@ const Navbar = ({ router }) => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{zIndex:"10000000"}}>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{zIndex:"10000000"}}>
       <Link href="/admin-dashboard" passHref>
         <div className="navbar-brand" style={{cursor:"pointer"}}>logo du site</div>
       </Link>

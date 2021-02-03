@@ -6,7 +6,7 @@ const ProductsByCategoryComponent = ({ selectedCategory, products }) => {
       </h1>
       <div className="row text-left my-5">
         {products &&
-          products.products.map(
+          products.map(
             (product) =>
               product.categorie._id === selectedCategory._id && (
                 <div className="col-4 mx-auto mb-3">

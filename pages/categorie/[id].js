@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 const CategoryById = ({ products, category }) => {
   const router = useRouter();
   useEffect(() => {
-    if (!category.category) {
+    if (!category) {
       router.push("/");
     }
   });
@@ -15,26 +15,24 @@ const CategoryById = ({ products, category }) => {
   return (
     <Layout>
       <PublicNavBar />
-      <CategoryHeader category={category}/>
-      <ProductsByCategoryList products={products}/>
+      <CategoryHeader category={category} />
+      <ProductsByCategoryList products={products} />
     </Layout>
   );
 };
 
 export const getServerSideProps = async ({ params }) => {
-  const code = params.id;
-  const categoryUrl = await fetch(
-    `http://localhost:3000/api/public-category/${code}`,
-  );
+  const id = params.id;
+  const categoryUrl = await fetch(`${process.env.REST_API}/api/category/${id}`);
   const category = await categoryUrl.json();
 
-  const productsUrl = await fetch("http://localhost:3000/api/product/get");
+  const productsUrl = await fetch(`${process.env.REST_API}/api/product/get`);
   const products = await productsUrl.json();
 
   return {
     props: {
       category,
-      products
+      products,
     },
   };
 };

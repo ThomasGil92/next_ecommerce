@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+
 const CategoriesSlider = ({ categories }) => {
   return (
     <div
@@ -9,7 +11,7 @@ const CategoriesSlider = ({ categories }) => {
     >
       <div className="carousel-inner" style={{ borderRadius: "20px" }}>
         {categories &&
-          categories.categories.map((category, i) => {
+          categories.map((category, i) => {
             return (
               <Link key={i} href={`/categorie/${category._id}`} passHref>
                 <div
@@ -19,7 +21,7 @@ const CategoriesSlider = ({ categories }) => {
                 >
                   <img
                     src={category.imageUrl}
-                    className="d-block w-100"
+                    className="d-block w-100 lazyload"
                     alt={category.categoryName}
                   />
 

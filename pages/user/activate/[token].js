@@ -24,16 +24,8 @@ const ActivateAccount = () => {
     error: "",
   });
   const {
-    email,
-    token,
-    buttonText,
     first_name,
     last_name,
-    address,
-    zip_code,
-    city,
-    country,
-    password,
   } = state;
 
   useEffect(() => {
@@ -65,7 +57,7 @@ const ActivateAccount = () => {
         password,
         token,
       });
-      axios.post(`/api/user/signup`, {
+      axios.post(`${process.env.REST_API}/api/user/signup`, {
         token,
       }).then((err,result)=>{
           if(err){
@@ -78,18 +70,6 @@ const ActivateAccount = () => {
     }
   }, [router]);
 
-   const signup = async (e) => {
-    try {
-      const response = await axios.post(`/api/user/signup`, {
-        token,
-      });
-       console.log('account activate response', response)
-      router.push("/user/login");
-    } catch (error) {
-      setState({ ...state, error: error });
-    }
-  };
-
   return (
     <Layout>
       {loading ? (
@@ -98,7 +78,7 @@ const ActivateAccount = () => {
         <>
           <PublicNavBar />
           <div className="d-flex align-items-center">
-            <div className="col-md-6 offset-md-3 mt-5 pt-5">
+            <div className="col-md-6 offset-md-3 mt-5 pt-5 text-center">
               <h1>Bienvenue {first_name} {last_name}</h1>
             </div>
           </div>

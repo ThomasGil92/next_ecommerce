@@ -1,8 +1,8 @@
 import Link from "next/link";
 const SideBar = ({ setSelectedOrders }) => {
   return (
-    <ul className="nav flex-column col-2 bg-secondary py-3 px-0 vh-100">
-      <li className="nav-item border-bottom">
+    <ul className="nav flex-column col-2 bg-secondary px-0 fixed-top pt-5 vh-100">
+      <li className="nav-item border-bottom mt-md-3">
         <Link href="/products">
           <a className="nav-link text-white active">Produits</a>
         </Link>
