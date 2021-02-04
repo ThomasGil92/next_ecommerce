@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 
 const Products = ({ categories, products }) => {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showCategories, setShowCategories] = useState(false);
   const [showProductsList, setShowProductsList] = useState(false);
@@ -20,55 +19,45 @@ const Products = ({ categories, products }) => {
   useEffect(() => {
     if (!sessionStorage.getItem("admin") && !sessionStorage.getItem("master")) {
       router.push("/login");
-    } else {
-      setTimeout(function () {
-        setLoading(false);
-      }, 2000);
     }
   }, [isAuth]);
 
   return (
     <Layout>
-      {loading ? (
-        <LoadingState />
-      ) : (
-        <>
-          <NavBar />
-          <div className="row p-0 m-0">
-            <ProductsSideBar
-              setShowCategories={setShowCategories}
-              showCategories={showCategories}
-              setShowProductsList={setShowProductsList}
-              setSelectedCategory={setSelectedCategory}
-            />
-            <CategoriesSideBar
-              showCategories={showCategories}
-              setShowCategories={setShowCategories}
-              setSelectedCategory={setSelectedCategory}
-              setShowProductsList={setShowProductsList}
-              categories={categories}
-            />
-            {showProductsList &&
-              selectedCategory === "" &&
-              showProductsList === true && (
-                <ProductsList products={products} categories={categories} />
-              )}
-
-            {selectedCategory && !showProductsList && selectedCategory !== "" && (
-              <div
-                className={
-                  showCategories ? "col-8 offset-4" : "col-10 offset-2"
-                }
-              >
-                <ProductsByCategoryComponent
-                  selectedCategory={selectedCategory}
-                  products={products}
-                />
-              </div>
+      <>
+        <NavBar />
+        <div className="row p-0 m-0">
+          <ProductsSideBar
+            setShowCategories={setShowCategories}
+            showCategories={showCategories}
+            setShowProductsList={setShowProductsList}
+            setSelectedCategory={setSelectedCategory}
+          />
+          <CategoriesSideBar
+            showCategories={showCategories}
+            setShowCategories={setShowCategories}
+            setSelectedCategory={setSelectedCategory}
+            setShowProductsList={setShowProductsList}
+            categories={categories}
+          />
+          {showProductsList &&
+            selectedCategory === "" &&
+            showProductsList === true && (
+              <ProductsList products={products} categories={categories} />
             )}
-          </div>
-        </>
-      )}
+
+          {selectedCategory && !showProductsList && selectedCategory !== "" && (
+            <div
+              className={showCategories ? "col-8 offset-4" : "col-10 offset-2"}
+            >
+              <ProductsByCategoryComponent
+                selectedCategory={selectedCategory}
+                products={products}
+              />
+            </div>
+          )}
+        </div>
+      </>
     </Layout>
   );
 };
@@ -77,7 +66,7 @@ export async function getServerSideProps(context) {
     `${process.env.REST_API}/api/categories/get`,
   );
   const productsUrl = await fetch(`${process.env.REST_API}/api/product/get`);
- const categories = await categoriesUrl.json();
+  const categories = await categoriesUrl.json();
   const products = await productsUrl.json();
 
   return { props: { categories, products } };
