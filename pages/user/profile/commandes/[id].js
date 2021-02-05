@@ -67,7 +67,7 @@ const OrdersHistoric = ({ user, orders }) => {
   return (
     <Layout>
       <PublicNavBar />
-      <div className="row mt-5 pt-5 pb-5 mx-0 bg-white">
+      <div className="row mt-md-5 pt-md-5 pt-3 mt-40 pb-md-5 mx-0 bg-third">
         <div className="col-12 text-center">
           <h3>Vos commandes</h3>
           {orders &&

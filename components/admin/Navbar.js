@@ -78,14 +78,12 @@ const Navbar = ({ router }) => {
                   <Link href={`/admin/${isAuth.admin._id}`}>
                     <a className="dropdown-item">Votre profil</a>
                   </Link>
-
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
+{isAuth.admin.role===1 && (
+  <Link href={`/super-admin/new-admin`}>
+  <a className="dropdown-item">Ajouter un administrateur</a>
+</Link>
+)}
+                  
                 </div>
               </li>
               <li className="nav-item d-flex align-items-center">

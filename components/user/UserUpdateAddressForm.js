@@ -17,7 +17,7 @@ const UserUpdateAddressForm = ({ user }) => {
     buttonText: "Enregistrer les modifications",
     error: "",
   });
-  
+
   const {
     address,
     first_name,
@@ -62,27 +62,30 @@ const UserUpdateAddressForm = ({ user }) => {
     }
   };
   return (
-    <div className="col-8 text-left mx-auto">
+    <div className="col-11 col-md-8 text-left mx-auto pb-5">
+      <h2 className="text-secondary text-center">Modifier l'adresse de livraison</h2>
       <form onSubmit={handleSubmit} className="loginUser">
         {state && state.address !== "" && (
           <>
             <div className="form-group my-4">
               <div className="row justify-content-between m-0">
-                <div style={{ minWidth: "49%" }}>
+                <div className="input-width-100" style={{ minWidth: "49%" }}>
                   <h4>Nom</h4>
                   <input
                     type="text"
                     onChange={handleChange("first_name")}
                     placeholder={first_name}
+                    value={first_name}
                     className="form-control"
                   />
                 </div>
-                <div style={{ minWidth: "49%" }}>
+                <div className="input-width-100 mt-4 mt-md-0" style={{ minWidth: "49%" }}>
                   <h4>Prénom</h4>
                   <input
                     onChange={handleChange("last_name")}
                     placeholder={last_name}
                     type="text"
+                    value={last_name}
                     className="form-control"
                   />
                 </div>
@@ -96,6 +99,7 @@ const UserUpdateAddressForm = ({ user }) => {
                     onChange={handleChange("address")}
                     placeholder={address}
                     type="text"
+                    value={address}
                     className="form-control"
                   />
                 </div>
@@ -103,7 +107,7 @@ const UserUpdateAddressForm = ({ user }) => {
             </div>
             <div className="form-group my-4">
               <div className="row m-0 justify-content-between">
-                <div style={{ minWidth: "32%" }}>
+                <div className="input-width-100" style={{ minWidth: "32%" }}>
                   <h4>Code postal</h4>
                   <input
                     type="number"
@@ -114,7 +118,7 @@ const UserUpdateAddressForm = ({ user }) => {
                     className="form-control"
                   />
                 </div>
-                <div style={{ minWidth: "32%" }}>
+                <div className="input-width-100 mt-4 mt-md-0" style={{ minWidth: "32%" }}>
                   <h4>Ville</h4>
                   <input
                     type="text"
@@ -125,7 +129,7 @@ const UserUpdateAddressForm = ({ user }) => {
                     className="form-control"
                   />
                 </div>
-                <div style={{ minWidth: "32%" }}>
+                <div className="input-width-100 mt-4 mt-md-0" style={{ minWidth: "32%" }}>
                   <h4>Pays</h4>
                   <select
                     style={{ height: "50px" }}

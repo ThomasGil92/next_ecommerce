@@ -41,3 +41,48 @@ a {
 .bg-third {
   background-color: #f5f5f5;
 }
+
+
+@media (min-width: 576px) {
+  
+ }
+
+@media(max-width:768px){
+  #carouselExampleIndicators{
+    height:200px;
+    margin-top:0px;
+  }
+  .carousel-inner{
+    border-radius:0px;
+  }
+  .mt-40{
+    margin-top:40px;
+  }
+  .loginUser .input-width-100{
+min-width:100%!important;
+  }
+  #registerAndForgottenPassword{
+    text-align:center;
+  }
+  .dropdown-menu-bottom{
+    position:absolute!important;
+    width:100vw;
+    text-align:center;
+  }
+}
+
+@media (min-width: 768px) {
+  #carouselExampleIndicators{
+    max-width:65%;
+  }
+  .carousel-inner{
+    border-radius:20px;
+  }
+  #userLogin input{
+    max-width:49%;
+  }
+}
+
+@media (min-width: 992px) { }
+
+@media (min-width: 1200px) { }

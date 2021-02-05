@@ -61,39 +61,79 @@ const PublicNavBar = ({ products }) => {
             onSubmit={handleSubmit}
             className="form-inline mx-auto d-flex align-items-center"
           >
-            <div className="input-group">
-              <input
-                id="searchInPublicNav"
-                type="text"
-                style={{
-                  width: searchTerms && searchTerms !== "" ? "310px" : "400px",
-                  fontFamily: "FontAwesome",
-                }}
-                className="form-control rounded-pill d-inline-block"
-                placeholder="&#61442;"
-                onChange={handleSearch}
-                autoComplete="off"
-              />
-              {searchTerms && searchTerms !== "" && (
-                <div
-                  className="input-group-append"
+            {process.browser && (
+               window.innerWidth > 768 ? (
+              <div className="input-group">
+                <input
+                  id="searchInPublicNav"
+                  type="text"
                   style={{
-                    minWidth: "125px",
-                    marginLeft: "-35px",
-                    zIndex: "5",
+                    width:
+                      searchTerms && searchTerms !== "" ? "310px" : "400px",
+                    fontFamily: "FontAwesome",
                   }}
-                >
-                  <button
-                    className="btn btn-dark rounded-pill w-100 py-1"
-                    type="submit"
+                  className="form-control rounded-pill d-inline-block"
+                  placeholder="&#61442;"
+                  onChange={handleSearch}
+                  autoComplete="off"
+                />
+                {searchTerms && searchTerms !== "" && (
+                  <div
+                    className="input-group-append"
+                    style={{
+                      minWidth: "125px",
+                      marginLeft: "-35px",
+                      zIndex: "5",
+                    }}
                   >
-                    Rechercher
-                  </button>
-                </div>
-              )}
-            </div>
+                    <button
+                      className="btn btn-dark rounded-pill w-100 py-1"
+                      type="submit"
+                    >
+                      Rechercher
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="input-group">
+                <input
+                  id="searchInPublicNav"
+                  type="text"
+                  maxlength="21"
+                  style={{
+                    width:
+                      searchTerms && searchTerms !== "" ? "60%" : "100%",
+                    fontFamily: "FontAwesome",
+                  }}
+                  className="form-control rounded-pill d-inline-block"
+                  placeholder="&#61442;"
+                  onChange={handleSearch}
+                  autoComplete="off"
+                />
+                {searchTerms && searchTerms !== "" && (
+                  <div
+                    className="input-group-append"
+                    style={{
+                      minWidth: "125px",
+                      marginLeft: "-35px",
+                      zIndex: "5",
+                    }}
+                  >
+                    <button
+                      className="btn btn-dark rounded-pill w-100 py-1"
+                      type="submit"
+                    >
+                      Rechercher
+                    </button>
+                  </div>
+                )}
+              </div>
+            )
+            )}
+            
           </form>
-          <div className="d-flex">
+          <div className="d-flex align-items-center">
             {userAuth && !userAuth.token ? (
               <Link href="/user/login" passHref>
                 <div
@@ -117,8 +157,8 @@ const PublicNavBar = ({ products }) => {
               </Link>
             ) : (
               <>
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item dropdown mr-2 d-flex align-items-center">
+                <ul className="navbar-nav ml-md-auto">
+                  <li className="nav-item dropdown mr-2">
                     <a
                       className="btn dropdown-toggle text-dark"
                       type="button"
@@ -130,7 +170,7 @@ const PublicNavBar = ({ products }) => {
                       <i className="fas fa-user fa-2x text-dark"></i>
                     </a>
                     <div
-                      className="dropdown-menu  dropdown-menu-right"
+                      className="dropdown-menu dropdown-menu-bottom dropdown-menu-md-right"
                       aria-labelledby="navbarDropdown"
                     >
                       {/* <Link href={`/admin/${isAuth.admin._id}`}>

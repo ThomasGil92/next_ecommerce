@@ -163,7 +163,11 @@ const searchResult = ({ products, query }) => {
               );
             })
           ) : (
-            <h2 className="col-md-10 mx-auto text-center text-secondary">Aucun produit comportant les termes "{query}"</h2>
+            <div className="col-12 col-md-10 mx-auto text-center px-0">
+              <h3 className="text-secondary">
+                Aucun produit comportant les termes: <br /><span className="text-dark text-uppercase mt-4 d-block">"{query}"</span>
+              </h3>
+            </div>
           )}
           <div
             className="modal fade"

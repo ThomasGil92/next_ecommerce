@@ -13,7 +13,7 @@ const ProductNavbar = ({
       <div className="mr-auto w-25 d-flex align-items-center">
         <span className="mr-2">Filtrer par catégorie</span>
         <select className="custom-select" onChange={handleSelect}>
-          <option selected></option>
+          <option selected value="Toutes les catégories">Toutes les catégories</option>
           {categories &&
             categories.map((category) => {
               return (

@@ -6,7 +6,7 @@ const UpdateAddress = ({ products, user }) => {
   return (
     <Layout>
       <PublicNavBar products={products} />
-      <div className="row mt-5 pt-5 mx-0 text-center">
+      <div className="row mt-40 mt-md-5 pt-4 pt-md-5 mx-0 text-center">
         <UserUpdateAddressForm user={user} />
       </div>
     </Layout>

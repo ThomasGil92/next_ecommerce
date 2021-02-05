@@ -51,7 +51,7 @@ const ForgotPasswordForm = () => {
   return (
     <div className="row mt-5 pt-5 mx-0 text-center loginUser">
       <div className="col-10 text-center mx-auto">
-        <h2 className="text-secondary">Créez votre compte</h2>
+        <h2 className="text-secondary">Mot de passe oublié?</h2>
         {error && error !== "" && <p>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group my-4">

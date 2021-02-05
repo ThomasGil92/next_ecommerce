@@ -78,7 +78,7 @@ const UserLoginForm = () => {
         password !== ""&&
         email !== "")
       ) {
-        const response = await axios.post(`/api/user/confirmation`, {
+        const response = await axios.post(`${process.env.REST_API}/api/user/confirmation`, {
           userFields,
         });
         console.log(response);
@@ -102,7 +102,7 @@ const UserLoginForm = () => {
   };
 
   return (
-    <div className="row mt-5 pt-5 mx-0 text-center loginUser">
+    <div className="row mt-5 pt-5 pb-5 mx-0 text-center loginUser">
       <div className="col-10 text-center mx-auto">
         <h2 className="text-secondary">Créez votre compte</h2>
         {error && error !== "" && <p>{error}</p>}

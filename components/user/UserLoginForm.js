@@ -53,29 +53,27 @@ const UserLoginForm = () => {
 
   return (
     <div className="row mt-5 pt-5 mx-0 text-center loginUser">
-      <div className="col-7 text-center mx-auto">
+      <div className="col-11 col-md-7 text-center mx-auto">
         <h2 className="text-secondary">Connection</h2>
         {error && error !== "" && <p className="text-danger">{error}</p>}
-        <form onSubmit={handleSubmit}>
+        <form id="userLogin" onSubmit={handleSubmit}>
           <div className="form-group my-4">
             <div className="row justify-content-between">
               <input
-                style={{ maxWidth: "49%" }}
                 type="email"
                 name="email"
                 onChange={handleChange("email")}
                 placeholder="Email"
                 value={email}
-                className="form-control p-3"
+                className="form-control p-3 mb-3 mb-md-0"
               />
               <input
-                style={{ maxWidth: "49%" }}
                 type="password"
                 name="password"
                 onChange={handleChange("password")}
                 placeholder="Mot de passe (min 8 caractères)"
                 value={password}
-                className="form-control p-3"
+                className="form-control p-3 mb-4 mb-md-0"
               />
             </div>
           </div>
@@ -99,14 +97,22 @@ const UserLoginForm = () => {
               >
                 {buttonText}
               </button>
-              <Link href="/account/user-register" passHref>
-                <a className="nav-link text-info px-0">Pas encore de compte?</a>
-              </Link>
-              <Link href="/account/password-forgot" passHref>
-                <a className="nav-link text-info px-0 ml-auto">
-                  Mot de passe oublié?
-                </a>
-              </Link>
+              <div id="registerAndForgottenPassword" className="w-100 d-md-flex mt-3">
+                <div className="mr-auto">
+                  <Link href="/account/user-register" passHref>
+                  <a className="nav-link text-info p-0">
+                    Pas encore de compte?
+                  </a>
+                </Link>
+                </div>
+                
+                <div className="ml-auto"><Link href="/account/password-forgot" passHref>
+                  <a className="nav-link text-info p-0">
+                    Mot de passe oublié?
+                  </a>
+                </Link></div>
+                
+              </div>
             </div>
           </div>
         </form>

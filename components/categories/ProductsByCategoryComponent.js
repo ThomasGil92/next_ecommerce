@@ -5,13 +5,17 @@ const ProductsByCategoryComponent = ({ selectedCategory, products }) => {
         Liste des produits de la catégorie "{selectedCategory.categoryName}"
       </h1>
       <div className="row text-left my-5">
-        {products &&
+        {products.length > 0 ? (
           products.map(
             (product) =>
               product.categorie._id === selectedCategory._id && (
                 <div className="col-4 mx-auto mb-3">
-                  <div className="card" style={{maxWidth:"290px"}}>
-                  <img src={product.imageUrl} className="card-img-top" alt={product.productName}/>
+                  <div className="card" style={{ maxWidth: "290px" }}>
+                    <img
+                      src={product.imageUrl}
+                      className="card-img-top"
+                      alt={product.productName}
+                    />
                     <div className="card-body p-3">
                       <div className="card-title">
                         <h5>
@@ -22,13 +26,26 @@ const ProductsByCategoryComponent = ({ selectedCategory, products }) => {
                       <p className="card-text">{product.description}</p>
                     </div>
                     <div className="ml-auto">
-                          <span className={product.stock<5?"text-danger":"text-success"}>Stock: {product.stock}</span>{' '}{product.stock<5?(<i className="fas fa-exclamation-triangle text-danger"></i>):""}
+                      <span
+                        className={
+                          product.stock < 5 ? "text-danger" : "text-success"
+                        }
+                      >
+                        Stock: {product.stock}
+                      </span>{" "}
+                      {product.stock < 5 ? (
+                        <i className="fas fa-exclamation-triangle text-danger"></i>
+                      ) : (
+                        ""
+                      )}
                     </div>
-                    
                   </div>
                 </div>
               ),
-          )}
+          )
+        ) : (
+          <div className="mx-auto h3">Aucun produit enregistré pour le moment</div>
+        )}
       </div>
     </div>
   );

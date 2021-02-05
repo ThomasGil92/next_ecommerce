@@ -6,7 +6,7 @@ const AddCategoriesForm = () => {
   const router = useRouter();
   const [categorieFields, setCategorieFields] = useState({
     categoryName: "",
-    imageUrl: "",
+    imageUrl: "https://picsum.photos/1300/400",
   });
 
   const { categoryName, imageUrl } = categorieFields;
@@ -59,7 +59,7 @@ const AddCategoriesForm = () => {
     }
   };
   return (
-    <form className="col-6 mt-5 text-left mx-auto">
+    <form className="col-6 mt-5 pt-5 text-left mx-auto">
       <h4>Ajouter une catégorie de produits</h4>
       <div>
         <input

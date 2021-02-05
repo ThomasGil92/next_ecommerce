@@ -7,6 +7,7 @@ const CategoryHeader = ({ category }) => {
         backgroundAttachment: "fixed",
         backgroundPosition:"bottom",
         backgroundImage: `url(${category.category.imageUrl})`,
+        backgroundRepeat:"no-repeat"
       }}
     >
       <h2 className="col-4 mx-auto p-3 rounded" style={{backgroundColor:"rgb(255,255,255,0.7)"}}>{category.category.categoryName}</h2>

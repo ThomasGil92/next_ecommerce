@@ -74,7 +74,7 @@ const ProductsList = ({ products, categories }) => {
           <tbody>
             {products &&
               products.map((product) => {
-                return selectedCategory.categorie === "" ? (
+                return selectedCategory.categorie === "Toutes les catégories" ? (
                   <tr
                     style={{ cursor: "pointer" }}
                     data-toggle="modal"
