@@ -4,11 +4,14 @@ import CartRecap from "../components/public/CartRecap";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-const Cart = ({products}) => {
+const Cart = ({ products }) => {
   const [totalNumberOfArticle, setTotalNumberOfArticle] = useState();
   const [totalPrice, setTotalPrice] = useState();
+
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
+  const theme = useSelector((state) => state.theme);
+
   useEffect(() => {
     if (process.browser) {
       if (localStorage.getItem("cart")) {
@@ -30,9 +33,15 @@ const Cart = ({products}) => {
   }, [cart]);
 
   return (
-    <Layout>
+    <Layout title="Panier">
       <PublicNavBar products={products} />
-      <div className="row flex-column mt-5 pt-3 mx-0 bg-third">
+      <div
+        className={
+          theme === "dark"
+            ? "row flex-column mt-5 pt-3 mx-0 bg-dark"
+            : "row flex-column mt-5 pt-3 mx-0 bg-third"
+        }
+      >
         <div className="col-6 py-3 mx-auto d-flex justify-content-between">
           <div
             className="circle bg-warning m-2 text-center text-center d-flex justify-content-center align-items-center"
@@ -101,7 +110,7 @@ const Cart = ({products}) => {
         <CartRecap />
       </div>
       <div
-        className="row m-0 d-flex justify-content-between gradient-for-cart-footer fixed-bottom px-4 pb-5"
+        className={theme==="dark"?"row m-0 d-flex justify-content-between fixed-bottom px-4 pb-5":"row m-0 d-flex justify-content-between gradient-for-cart-footer fixed-bottom px-4 pb-5"}
         style={{ minHeight: "130px", fontFamily: "Montserrat, sans-serif" }}
       >
         <div>
@@ -149,7 +158,9 @@ const Cart = ({products}) => {
         </div>
         <div>
           <Link
-            href={user.user ? `/cart/livraison/${user.user._id}` : "/user/login"}
+            href={
+              user.user ? `/cart/livraison/${user.user._id}` : "/user/login"
+            }
             passHref
           >
             <button className="btn btn-success h-100">
@@ -166,6 +177,5 @@ export async function getServerSideProps(context) {
   const productsUrl = await fetch(`${process.env.REST_API}/api/categories/get`);
   const products = await productsUrl.json();
 
-  return { props: {products } };
+  return { props: { products } };
 }
-

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
+import {Redirect} from 'react-router-dom'
 import LoadingState from "../components/admin/LoadingState";
 import NavBar from "../components/admin/Navbar";
 import SideBar from "../components/admin/SideBar";
@@ -19,7 +20,9 @@ const AdminDashboard = ({ orders }) => {
 
   return (
     <Layout>
-        <>
+        
+        {process.browser &&sessionStorage.getItem("admin")?(
+          <>
           <NavBar />
           <div className="row p-0 m-0">
             <SideBar setSelectedOrders={setSelectedOrders} />
@@ -76,6 +79,8 @@ const AdminDashboard = ({ orders }) => {
             </div>
           </div>
         </>
+        ):("")}
+          
     </Layout>
   );
 };

@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux'
 
 const CartShippingAddress = ({ infos, token, setAddress }) => {
   
+  const theme = useSelector((state) => state.theme);
   const user = useSelector((state) => state.user);
   const handleAddress = (e) => {
     e.preventDefault();
@@ -12,7 +13,7 @@ const CartShippingAddress = ({ infos, token, setAddress }) => {
   return (
     
       <div
-        className="col-4 text-center mt-3 bg-white h-100 border border-light px-0 "
+        className={theme==="dark"?"col-4 text-center mt-3 bg-dark text-white h-100 border border-warning px-0 ":"col-4 text-center mt-3 bg-white h-100 border border-light px-0 "}
         style={{
           borderRadius: "20px",
         }}

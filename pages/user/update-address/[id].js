@@ -1,14 +1,32 @@
 import PublicNavBar from "../../../components/public/PublicNavBar";
 import Layout from "../../../components/Layout";
 import UserUpdateAddressForm from "../../../components/user/UserUpdateAddressForm";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const UpdateAddress = ({ products, user }) => {
+  const router = useRouter();
+  const userAuth = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!userAuth.token) {
+      router.push("/user/login");
+    }
+  });
+
   return (
     <Layout>
-      <PublicNavBar products={products} />
-      <div className="row mt-40 mt-md-5 pt-4 pt-md-5 mx-0 text-center">
-        <UserUpdateAddressForm user={user} />
-      </div>
+      {userAuth.token ? (
+        <>
+          <PublicNavBar products={products} />
+          <div className="row mt-40 mt-md-5 pt-4 pt-md-5 mx-0 text-center">
+            <UserUpdateAddressForm user={user} />
+          </div>
+        </>
+      ) : (
+        ""
+      )}
     </Layout>
   );
 };

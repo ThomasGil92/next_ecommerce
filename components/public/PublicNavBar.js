@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import { setCart, setUser, clearUser } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast, Zoom } from "react-toastify";
+import {ThemeButton} from '../uiComponent/ThemeButton'
 
 const PublicNavBar = ({ products }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const userAuth = useSelector((state) => state.user);
+  const theme = useSelector((state) => state.theme);
   const [searchTerms, setSearchTerms] = useState("");
 
   useEffect(() => {
@@ -34,6 +36,9 @@ const PublicNavBar = ({ products }) => {
       if (sessionStorage.getItem("user")) {
         sessionStorage.clear();
         dispatch(clearUser());
+        if (localStorage.getItem("session")){
+          localStorage.removeItem("session")
+        }
         router.reload();
       }
     }
@@ -41,7 +46,7 @@ const PublicNavBar = ({ products }) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-white p-0 m-0">
+      <nav className={theme==="dark"?"navbar navbar-expand-lg fixed-top navbar-dark bg-dark border-bottom border-secondary p-0 m-0":"navbar navbar-expand-lg fixed-top navbar-light bg-white p-0 m-0"}>
         <Link href={"/"}>
           <a className="navbar-brand">Logo</a>
         </Link>
@@ -72,7 +77,7 @@ const PublicNavBar = ({ products }) => {
                       searchTerms && searchTerms !== "" ? "310px" : "400px",
                     fontFamily: "FontAwesome",
                   }}
-                  className="form-control rounded-pill d-inline-block"
+                  className={theme==="dark"?"form-control bg-dark text-white rounded-pill d-inline-block border-secondary":"form-control rounded-pill d-inline-block"}
                   placeholder="&#61442;"
                   onChange={handleSearch}
                   autoComplete="off"
@@ -87,7 +92,7 @@ const PublicNavBar = ({ products }) => {
                     }}
                   >
                     <button
-                      className="btn btn-dark rounded-pill w-100 py-1"
+                      className={theme==="dark"?"btn btn-dark rounded-pill border border-warning w-100 py-1":"btn btn-dark rounded-pill w-100 py-1"}
                       type="submit"
                     >
                       Rechercher
@@ -134,6 +139,7 @@ const PublicNavBar = ({ products }) => {
             
           </form>
           <div className="d-flex align-items-center">
+            <ThemeButton/>
             {userAuth && !userAuth.token ? (
               <Link href="/user/login" passHref>
                 <div
@@ -145,7 +151,7 @@ const PublicNavBar = ({ products }) => {
                     width="35"
                     height="35"
                     fill="currentColor"
-                    className="bi bi-person"
+                    className={theme==="dark"?"bi bi-person text-white":"bi bi-person"}
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -160,27 +166,21 @@ const PublicNavBar = ({ products }) => {
                 <ul className="navbar-nav ml-md-auto">
                   <li className="nav-item dropdown mr-2">
                     <a
-                      className="btn dropdown-toggle text-dark"
-                      type="button"
+                      className={theme==="dark"?"nav-link dropdown-toggle text-white":"nav-link dropdown-toggle text-dark"}
+                      role="button"
                       data-toggle="dropdown"
                       id="navbarDropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      <i className="fas fa-user fa-2x text-dark"></i>
+                      <i className="fas fa-user fa-2x"></i>
                     </a>
                     <div
                       className="dropdown-menu dropdown-menu-bottom dropdown-menu-md-right"
                       aria-labelledby="navbarDropdown"
                     >
-                      {/* <Link href={`/admin/${isAuth.admin._id}`}>
-                    <a className="dropdown-item">Votre profil</a>
-                  </Link> */}
 
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                      <div className="dropdown-divider"></div>
+                      
                       <Link
                         href={`/user/profile/${userAuth.user._id}`}
                         passHref

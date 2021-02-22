@@ -5,13 +5,12 @@ import CartValidation from "../../../components/public/CartValidation";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import jwt from "jsonwebtoken";
 
 const Livraison = ({ user }) => {
   const [address, setAddress] = useState();
   const [totalPrice, setTotalPrice] = useState();
-  //const user = useSelector((state) => state.user);
   const router = useRouter();
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
@@ -25,9 +24,9 @@ const Livraison = ({ user }) => {
     }
   }, []);
   return (
-    <Layout>
+    <Layout title="Adresse de livraison">
       <PublicNavBar />
-      <div className="row flex-column mt-5 pt-3 mx-0 bg-third">
+      <div className={theme==="dark"?"row flex-column mt-5 pt-3 mx-0 bg-dark":"row flex-column mt-5 pt-3 mx-0 bg-third"}>
         <div className="col-6 py-3 mx-auto d-flex justify-content-between">
           <div
             className="circle m-2 bg-warning text-center text-center d-flex justify-content-center align-items-center"

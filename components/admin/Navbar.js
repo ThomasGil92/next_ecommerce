@@ -1,16 +1,19 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { withRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { clearAdmin, setAdmin } from "../../redux/actions";
+import {ThemeButton} from '../uiComponent/ThemeButton'
+import { clearAdmin, setAdmin, setTheme } from "../../redux/actions";
 
 const Navbar = ({ router }) => {
   const isAuth = useSelector((state) => state.admin);
+  const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
-
+ 
   useEffect(() => {
     dispatch(setAdmin());
-  }, [dispatch]);
+  }, []);
 
   const logout = (e) => {
     e.preventDefault();
@@ -23,10 +26,24 @@ const Navbar = ({ router }) => {
     }
   };
 
+  const changeTheme = (newTheme) => (e) => {
+    e.preventDefault();
+    dispatch(setTheme(newTheme));
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{zIndex:"10000000"}}>
+    <nav
+      className={
+        theme === "dark"
+          ? "navbar navbar-expand-lg navbar-dark bg-dark fixed-top border-bottom border-warning"
+          : "navbar navbar-expand-lg navbar-light bg-light fixed-top border-bottom border-secondary"
+      }
+      style={{ zIndex: "10000000" }}
+    >
       <Link href="/admin-dashboard" passHref>
-        <div className="navbar-brand" style={{cursor:"pointer"}}>logo du site</div>
+        <div className="navbar-brand" style={{ cursor: "pointer" }}>
+          logo du site
+        </div>
       </Link>
 
       <button
@@ -50,9 +67,13 @@ const Navbar = ({ router }) => {
           ""
         )}
         <ul className="navbar-nav ml-auto">
-          <li title="Voir le site" className="nav-item mr-2 d-flex align-items-center">
+         <ThemeButton/>
+          <li
+            title="Voir le site"
+            className="nav-item mr-2 d-flex align-items-center"
+          >
             <Link href={"/"}>
-              <a target="_blank" className="btn btn-link text-white">
+              <a target="_blank" className={theme==="dark"?"btn btn-link text-white":"btn btn-link text-dark"}>
                 <i className="far fa-eye fa-2x"></i>
               </a>
             </Link>
@@ -61,7 +82,7 @@ const Navbar = ({ router }) => {
             <>
               <li className="nav-item dropdown mr-2">
                 <a
-                  className="nav-link dropdown-toggle"
+                  className={theme==="dark"?"nav-link dropdown-toggle text-white":"nav-link dropdown-toggle text-dark"}
                   href="#"
                   id="navbarDropdown"
                   role="button"
@@ -69,7 +90,7 @@ const Navbar = ({ router }) => {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i className="fas fa-user fa-2x text-white"></i>
+                  <i className="fas fa-user fa-2x"></i>
                 </a>
                 <div
                   className="dropdown-menu  dropdown-menu-right text-dark"
@@ -78,12 +99,11 @@ const Navbar = ({ router }) => {
                   <Link href={`/admin/${isAuth.admin._id}`}>
                     <a className="dropdown-item">Votre profil</a>
                   </Link>
-{isAuth.admin.role===1 && (
-  <Link href={`/super-admin/new-admin`}>
-  <a className="dropdown-item">Ajouter un administrateur</a>
-</Link>
-)}
-                  
+                  {isAuth.admin.role === 1 && (
+                    <Link href={`/super-admin/new-admin`}>
+                      <a className="dropdown-item">Ajouter un administrateur</a>
+                    </Link>
+                  )}
                 </div>
               </li>
               <li className="nav-item d-flex align-items-center">

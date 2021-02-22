@@ -4,6 +4,7 @@ import * as types from "./actions";
 const initialAdminState = {};
 const initialUserState = {};
 const initialCartState = {};
+const initialThemeState="light"
 
 const userReducer = (state = initialUserState, { type, payload }) => {
   switch (type) {
@@ -16,6 +17,14 @@ const userReducer = (state = initialUserState, { type, payload }) => {
 const adminReducer = (state = initialAdminState, { type, payload }) => {
   switch (type) {
     case types.SET_ADMIN:
+      return payload;
+    default:
+      return state;
+  }
+};
+const themeReducer = (state = initialThemeState, { type, payload }) => {
+  switch (type) {
+    case types.SET_THEME:
       return payload;
     default:
       return state;
@@ -36,6 +45,7 @@ const reducers = {
   admin: adminReducer,
   user: userReducer,
   cart: cartReducer,
+  theme:themeReducer
 };
 
 export default combineReducers(reducers);

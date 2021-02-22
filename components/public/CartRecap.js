@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../redux/actions";
 
 const CartRecap = () => {
   const dispatch = useDispatch();
   const [allProductInCart, setAllProductInCart] = useState();
   const [totalPrice, setTotalPrice] = useState();
+
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
@@ -114,7 +116,11 @@ const CartRecap = () => {
               <div
                 id={i}
                 key={i}
-                className="col-10 my-3 py-2 d-flex mx-auto rounded bg-white"
+                className={
+                  theme === "dark"
+                    ? "col-10 my-3 py-2 d-flex mx-auto rounded bg-dark text-white border border-warning"
+                    : "col-10 my-3 py-2 d-flex mx-auto rounded bg-white"
+                }
               >
                 <div className="col-6 d-flex align-items-center">
                   <img
@@ -141,13 +147,17 @@ const CartRecap = () => {
                     <strong>&euro;</strong>
                   </p>
                   <div
-                    className="btn-group ml-4"
+                    className="btn-group border rounded ml-4"
                     role="group"
                     aria-label="Quantité"
                   >
                     <button
                       type="button"
-                      className="btn bg-third text-dark"
+                      className={
+                        theme === "dark"
+                          ? "btn bg-dark text-white"
+                          : "btn bg-third text-dark"
+                      }
                       onClick={addToCart(product, "remove", i)}
                     >
                       <svg
@@ -168,7 +178,11 @@ const CartRecap = () => {
                         />
                       </svg>
                     </button>
-                    <div className="bg-third p-2">
+                    <div
+                      className={
+                        theme === "dark" ? "bg-dark p-2" : "bg-third p-2"
+                      }
+                    >
                       <div
                         id={product._id}
                         className="bg-danger d-flex justify-content-center text-white"
@@ -183,7 +197,11 @@ const CartRecap = () => {
                     </div>
                     <button
                       type="button"
-                      className="btn bg-third text-dark"
+                      className={
+                        theme === "dark"
+                          ? "btn bg-dark text-white"
+                          : "btn bg-third text-dark"
+                      }
                       onClick={addToCart(product, "add", i)}
                     >
                       <svg

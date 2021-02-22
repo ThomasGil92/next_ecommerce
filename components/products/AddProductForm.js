@@ -8,7 +8,7 @@ const AddProductForm = ({ categories }) => {
     productName: "",
     price: "",
     description: "",
-    imageUrl: "http://via.placeholder.com/290x290/ffc107/ffffff/?text=Exemple+d%27image+290x290",
+    imageUrl: "http://via.placeholder.com/290x290/0082bf/ffffff/?text=EXEMPLE+D%27IMAGE+290x290",
     stock: "",
     categorie: "",
   });
@@ -77,9 +77,8 @@ const AddProductForm = ({ categories }) => {
     }
   };
   return (
-    <>
+    <div className="pt-md-5">
       <h2 className="text-center mt-5">Ajouter un produit</h2>
-      {productFields && JSON.stringify(productFields)}
       <form
         className="col-6 my-5 text-left mx-auto"
         encType="multipart/form-data"
@@ -179,7 +178,7 @@ const AddProductForm = ({ categories }) => {
         </div>
         {productFields && JSON.stringify(productFields)}
       </form>
-    </>
+    </div>
   );
 };
 

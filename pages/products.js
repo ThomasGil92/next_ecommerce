@@ -3,7 +3,6 @@ import ProductsSideBar from "../components/admin/ProductsSideBar";
 import CategoriesSideBar from "../components/admin/CategoriesSideBar";
 import ProductsList from "../components/products/ProductsList";
 import ProductsByCategoryComponent from "../components/categories/ProductsByCategoryComponent";
-import LoadingState from "../components/admin/LoadingState";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -11,16 +10,27 @@ import { useSelector } from "react-redux";
 
 const Products = ({ categories, products }) => {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(
+    "Toutes les catégories",
+  );
   const [showCategories, setShowCategories] = useState(false);
   const [showProductsList, setShowProductsList] = useState(false);
   const isAuth = useSelector((state) => state.admin);
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
-    if (!sessionStorage.getItem("admin") && !sessionStorage.getItem("master")) {
-      router.push("/login");
+    if (theme === "dark") {
+      const productList = document.getElementById("themeEl");
+      console.log(productList);
+      if (productList !== null) {
+        productList.classList.add("border-left");
+        productList.classList.add("border-warning");
+      }
     }
-  }, [isAuth]);
+    if (!sessionStorage.getItem("admin") && !sessionStorage.getItem("master")) {
+      router.push("/login-admin");
+    }
+  }, [isAuth, theme, showCategories]);
 
   return (
     <Layout>
@@ -48,7 +58,11 @@ const Products = ({ categories, products }) => {
 
           {selectedCategory && !showProductsList && selectedCategory !== "" && (
             <div
-              className={showCategories ? "col-8 offset-4" : "col-10 offset-2"}
+              id="themeEl"
+              className={
+                showCategories ? "col-8 offset-4 pl-0" : "col-10 offset-2 pl-0"
+              }
+              //className={theme==="dark"?"border-top border-warning":""}
             >
               <ProductsByCategoryComponent
                 selectedCategory={selectedCategory}

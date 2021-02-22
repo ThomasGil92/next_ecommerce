@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../redux/actions";
 
 const PublicProductList = ({ products }) => {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme);
   const [selectedProduct, setSelectedProduct] = useState({
     _id: "",
     price: "",
@@ -78,7 +79,13 @@ const PublicProductList = ({ products }) => {
   };
 
   return (
-    <div className="mt-5 mx-0 text-center bg-third pb-5">
+    <div
+      className={
+        theme === "dark"
+          ? "mt-5 mx-0 text-center text-light bg-dark pb-5"
+          : "mt-5 mx-0 text-center bg-third pb-5"
+      }
+    >
       <h2>Tous nos produits</h2>
       <div className="container-fluid">
         <div className="row mx-0 mt-4">
@@ -87,7 +94,11 @@ const PublicProductList = ({ products }) => {
               return (
                 <div key={i} className="col-md-3">
                   <div
-                    className="card mx-auto my-3"
+                    className={
+                      theme === "dark"
+                        ? "card mx-auto border-warning bg-dark my-3"
+                        : "card mx-auto my-3"
+                    }
                     style={{
                       maxWidth: "290px",
                       borderRadius: "15px",
@@ -95,7 +106,7 @@ const PublicProductList = ({ products }) => {
                     }}
                   >
                     <img
-                    loading="lazy"
+                      loading="lazy"
                       data-toggle="modal"
                       data-target="#exampleModal"
                       data-whatever={JSON.stringify(product)}
@@ -116,8 +127,7 @@ const PublicProductList = ({ products }) => {
                         className="card-title py-3"
                         style={{ lineHeight: "0.8", cursor: "pointer" }}
                       >
-                        {product.productName.charAt(0).toUpperCase() +
-                          product.productName.slice(1)}
+                        {product.productName.toUpperCase()}
                       </h5>
                       <div className="row m-0 ">
                         <div className="col-md-6 px-0 d-flex align-items-center">
@@ -125,14 +135,22 @@ const PublicProductList = ({ products }) => {
                         </div>
                         <div className="col-md-6 px-0">
                           <motion.button
+                            title={
+                              product.stock <= 0
+                                ? "Rupture de stock"
+                                : "Ajouter au panier"
+                            }
                             onClick={addToCart(product)}
+                            disabled={product.stock <= 0 && true}
                             initial={{
                               backgroundColor: "#e5e5e5",
                               color: "black",
                               border: "none",
                             }}
                             whileHover={{
-                              backgroundColor: "#FFC107",
+                              backgroundColor:
+                                product.stock > 0 ? "#FFC107" : "#e5e5e5",
+                              cursor: product.stock <= 0 && "not-allowed",
                               color: "red",
                               border: "none",
                             }}
@@ -161,7 +179,11 @@ const PublicProductList = ({ products }) => {
           aria-hidden="true"
         >
           <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
+            <div
+              className={
+                theme === "dark" ? "modal-content bg-dark" : "modal-content"
+              }
+            >
               <div className="modal-header">
                 <button
                   type="button"
@@ -186,6 +208,9 @@ const PublicProductList = ({ products }) => {
                     {productName.charAt(0).toUpperCase() + productName.slice(1)}
                   </h4>
                   <p className="mt-4">{description}</p>
+                </div>
+                <div className="text-right">
+                  <h4>{price} &euro;</h4>
                 </div>
               </div>
               <div className="modal-footer">

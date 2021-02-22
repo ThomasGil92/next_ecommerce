@@ -1,16 +1,27 @@
+import { useSelector } from "react-redux";
+
 const ProductsByCategoryComponent = ({ selectedCategory, products }) => {
+  const theme = useSelector((state) => state.theme);
   return (
-    <div className="text-center">
-      <h1>
+    <div className="text-center pt-5">
+      <h1 className={theme==="dark"?"text-light":"text-dark"}>
         Liste des produits de la catégorie "{selectedCategory.categoryName}"
       </h1>
-      <div className="row text-left my-5">
+      <div className="row text-left mt-5 pb-40 px-4">
         {products.length > 0 ? (
           products.map(
-            (product) =>
+            (product,i) =>
               product.categorie._id === selectedCategory._id && (
-                <div className="col-4 mx-auto mb-3">
-                  <div className="card" style={{ maxWidth: "290px" }}>
+                <div key={i} className="col-4 mb-3">
+                  <div
+                    className="card"
+                    className={
+                      theme === "dark"
+                        ? "bg-dark text-white border rounded border-warning"
+                        : "bg-white text-dark "
+                    }
+                    style={{ maxWidth: "290px" }}
+                  >
                     <img
                       src={product.imageUrl}
                       className="card-img-top"
@@ -25,7 +36,7 @@ const ProductsByCategoryComponent = ({ selectedCategory, products }) => {
                       </div>
                       <p className="card-text">{product.description}</p>
                     </div>
-                    <div className="ml-auto">
+                    <div className="ml-auto p-1">
                       <span
                         className={
                           product.stock < 5 ? "text-danger" : "text-success"
@@ -44,7 +55,9 @@ const ProductsByCategoryComponent = ({ selectedCategory, products }) => {
               ),
           )
         ) : (
-          <div className="mx-auto h3">Aucun produit enregistré pour le moment</div>
+          <div className="mx-auto h3">
+            Aucun produit enregistré pour le moment
+          </div>
         )}
       </div>
     </div>

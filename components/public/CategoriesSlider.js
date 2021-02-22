@@ -4,7 +4,7 @@ const CategoriesSlider = ({ categories }) => {
   return (
     <div
       id="carouselExampleIndicators"
-      className="carousel slide mx-auto mt-5 pt-md-5 h-100"
+      className="carousel slide mx-auto mt-40 mt-md-5 pt-md-5 h-100"
       data-ride="carousel"
     >
       <div className="carousel-inner">
@@ -22,7 +22,7 @@ const CategoriesSlider = ({ categories }) => {
                     alt={category.categoryName}
                   />
 
-                  <div className="carousel-caption pb-0 pb-md-4 mb-0 mb-md-5">
+                  <div className="carousel-caption" style={{top:"40%"}}>
                     <h1
                       className="rounded"
                       style={{ backgroundColor: "rgb(0,0,0,0.6)" }}

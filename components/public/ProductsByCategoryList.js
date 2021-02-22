@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
 import {useState,useEffect} from 'react'
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { setCart } from "../../redux/actions";
 const PublicProductList = ({ products }) => {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme);
+
   const [selectedProduct, setSelectedProduct] = useState({
     _id: "",
     price: "",
@@ -79,16 +81,16 @@ const PublicProductList = ({ products }) => {
     dispatch(setCart());
   };
   return (
-    <div className="mt-5 mx-0 text-center bg-third">
+    <div className={theme==="dark"?"mt-5 mx-0 text-center bg-dark":"mt-5 mx-0 text-center bg-third"}>
       <div className="container-fluid">
-        <div className="row mx-0 mt-4">
+        <div className="row mx-0 mt-4 pb-40">
           {products &&
             products.map((product, i) => {
               return (
                 product.categorie._id === categoryId && (
                   <div key={i} className="col-md-3">
                   <div
-                    className="card mx-auto my-3"
+                    className={theme==="dark"?"card mx-auto bg-dark border-warning text-white my-3":"card mx-auto my-3"}
                    
                     style={{
                       maxWidth: "290px",
@@ -163,7 +165,7 @@ const PublicProductList = ({ products }) => {
           aria-hidden="true"
         >
           <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
+            <div className={theme === "dark"?"modal-content bg-dark text-white":"modal-content"}>
               <div className="modal-header">
                 <button
                   type="button"
@@ -188,6 +190,9 @@ const PublicProductList = ({ products }) => {
                     {productName.charAt(0).toUpperCase() + productName.slice(1)}
                   </h4>
                   <p className="mt-4">{description}</p>
+                </div>
+                <div className="text-right mt-2">
+                  <h4>{price} &euro;</h4>
                 </div>
               </div>
               <div className="modal-footer">

@@ -63,7 +63,8 @@ const UpdatePassword = () => {
 
   return (
     <Layout>
-      <>
+      {userAuth.token ?(
+        <>
         <PublicNavBar />
         <div className="d-flex align-items-center">
           <div className="col-md-6 offset-md-3 mt-5 pt-5">
@@ -113,6 +114,8 @@ const UpdatePassword = () => {
           </div>
         </div>
       </>
+      ):("")}
+      
     </Layout>
   );
 };

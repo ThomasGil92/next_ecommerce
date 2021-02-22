@@ -97,17 +97,12 @@ useEffect(()=>{
   );
   return (
     <Layout>
-      {loading ? (
-        <LoadingState/>
-      ):(
         <>
         <NavBar />
-      <div className="container text-center">
+      <div className="container text-center mt-md-5 pt-md-5">
         <div className="mx-auto col-5 py-5">{loginForm()}</div>
       </div>
       </>
-      )}
-      
     </Layout>
   );
 };

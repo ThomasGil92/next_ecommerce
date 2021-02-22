@@ -1,16 +1,12 @@
 const CategoryHeader = ({ category }) => {
   return (
     <div
-      className="container-fluid text-center mt-5 pt-5"
+      className="container-fluid text-center mt-40 category-header pt-5 px-0"
       style={{
-        height: "300px",
-        backgroundAttachment: "fixed",
-        backgroundPosition:"bottom",
         backgroundImage: `url(${category.category.imageUrl})`,
-        backgroundRepeat:"no-repeat"
       }}
     >
-      <h2 className="col-4 mx-auto p-3 rounded" style={{backgroundColor:"rgb(255,255,255,0.7)"}}>{category.category.categoryName}</h2>
+      <h2 className="col-md-4 col-11 mx-auto p-3 rounded" style={{backgroundColor:"rgb(255,255,255,0.7)"}}>{category.category.categoryName}</h2>
     </div>
   );
 };

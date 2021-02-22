@@ -4,10 +4,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import ProductNavbar from "./ProductNavbar";
 import { mutate } from "swr";
+import {useSelector} from 'react-redux'
 
 const ProductsList = ({ products, categories }) => {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState({ categorie: "" });
+  const theme = useSelector((state) => state.theme);
+  const [selectedCategory, setSelectedCategory] = useState({ categorie: "Toutes les catégories" });
   const [toUpdate, setToUpdate] = useState({
     _id: "",
     price: "",
@@ -81,7 +83,7 @@ const ProductsList = ({ products, categories }) => {
                     title="Modifier"
                     data-target="#exampleModal"
                     data-whatever={JSON.stringify(product)}
-                    className="d-flex"
+                    className={theme && theme==="dark"?"d-flex text-white bg-dark":"d-flex bg "}
                     key={product._id}
                   >
                     <th className="col-3" style={{ fontWeight: "200" }}>

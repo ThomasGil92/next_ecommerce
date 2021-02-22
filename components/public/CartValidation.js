@@ -2,10 +2,14 @@ import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const CartValidation = ({ address, total }) => {
   const [state, setState] = useState();
   const [completed, setCompleted] = useState(false);
+
+  const theme = useSelector((state) => state.theme);
+
   useEffect(() => {
     if (!address) {
       setState({ ...state, total });
@@ -42,7 +46,11 @@ const CartValidation = ({ address, total }) => {
 
   return (
     <div
-      className="col-7 text-center mt-3 bg-white h-100 border border-light px-0 "
+      className={
+        theme === "dark"
+          ? "col-7 text-center mt-3 bg-dark h-100 border border-warning text-white px-0 "
+          : "col-7 text-center mt-3 bg-white h-100 border border-light px-0 "
+      }
       style={{
         borderRadius: "20px",
       }}

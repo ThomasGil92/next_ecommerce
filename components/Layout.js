@@ -3,21 +3,40 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import "react-toastify/dist/ReactToastify.css";
-import 'lazysizes';
-
+import "lazysizes";
+import { useSelector } from "react-redux";
+import {useEffect} from 'react'
 import Footer from "./public/Footer";
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
 
-const Layout = ({ children }) => {
+const Layout = ({ children ,title}) => {
+  const theme = useSelector((state) => state.theme);
+useEffect(()=>{
+  if (process.browser){
+    const body=document.querySelector("body")
+    if(theme==="light"){
+      body.style.backgroundColor="#f5f5f5"
+    }else if(theme==="dark"){
+      body.style.backgroundColor="#343A40"
+    }
+    
+  }
+},[theme])
+
   const head = () => (
     <Head>
-      <title>Create Next App</title>
+      <title>{title} / Ecommerce</title>
       {/* <script src="lazysizes.min.js" async=""></script> */}
-     {/*  <link rel="preload" href="bootstrap/css/bootstrap.min.css"></link> */}
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossOrigin="anonymous"/>
+      {/*  <link rel="preload" href="bootstrap/css/bootstrap.min.css"></link> */}
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+        crossOrigin="anonymous"
+      />
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -56,7 +75,9 @@ const Layout = ({ children }) => {
   return (
     <>
       {head()}
-      <div>
+      <div
+        //style={{ backgroundColor: theme === "dark" ? "" : "#f5f5f5f5" }}
+      >
         {children}
         <Footer />
       </div>
