@@ -153,7 +153,7 @@ const OrdersHistoric = ({ user, orders }) => {
                             <br />
                             {(order.state === "UNCHECKED" &&
                               "Pas encore envoyée") ||
-                              (order.state === "CHECKED" && "Commande envoyée")}
+                              (order.state === "SENT" && "Commande envoyée")}
                           </p>
                         </div>
                         <div className="card-title col-3 pb-0 text-right">

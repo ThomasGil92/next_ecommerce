@@ -11,10 +11,10 @@ import { useSelector } from "react-redux";
 const Products = ({ categories, products }) => {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState(
-    "Toutes les catégories",
+    "",
   );
   const [showCategories, setShowCategories] = useState(false);
-  const [showProductsList, setShowProductsList] = useState(false);
+  const [showProductsList, setShowProductsList] = useState(true);
   const isAuth = useSelector((state) => state.admin);
   const theme = useSelector((state) => state.theme);
 
@@ -33,7 +33,7 @@ const Products = ({ categories, products }) => {
   }, [isAuth, theme, showCategories]);
 
   return (
-    <Layout>
+    <Layout title="Inventaire">
       <>
         <NavBar />
         <div className="row p-0 m-0">

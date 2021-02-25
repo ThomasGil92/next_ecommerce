@@ -32,7 +32,7 @@ const Navbar = ({ router }) => {
   };
 
   return (
-    <nav
+    <div
       className={
         theme === "dark"
           ? "navbar navbar-expand-lg navbar-dark bg-dark fixed-top border-bottom border-warning"
@@ -119,7 +119,7 @@ const Navbar = ({ router }) => {
           )}
         </ul>
       </div>
-    </nav>
+    </div>
   );
 };
 export default withRouter(Navbar);

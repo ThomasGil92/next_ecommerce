@@ -76,7 +76,7 @@ useEffect(()=>{
           onChange={handleChange("email")}
           type="email"
           className="form-control"
-          placeholder="Type your email"
+          placeholder="exemple@votreemail.com"
           required
         />
       </div>
@@ -86,7 +86,7 @@ useEffect(()=>{
           onChange={handleChange("password")}
           type="password"
           className={error?"form-control border-danger":"form-control"}
-          placeholder="Type your password"
+          placeholder="********"
           required
         />
       </div>
@@ -96,7 +96,7 @@ useEffect(()=>{
     </form>
   );
   return (
-    <Layout>
+    <Layout title="Admin connexion">
         <>
         <NavBar />
       <div className="container text-center mt-md-5 pt-md-5">

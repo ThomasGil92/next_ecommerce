@@ -1,28 +1,28 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import {Redirect} from 'react-router-dom'
-import LoadingState from "../components/admin/LoadingState";
 import NavBar from "../components/admin/Navbar";
+import OrderDetail from "../components/admin/OrderDetail"
 import SideBar from "../components/admin/SideBar";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 const AdminDashboard = ({ orders }) => {
   const router = useRouter();
-  const [selectedOrders, setSelectedOrders] = useState(false);
+  const [selectedOrders, setSelectedOrders] = useState(true);
   const isAuth = useSelector((state) => state.admin);
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     if (!sessionStorage.getItem("admin") && !sessionStorage.getItem("master")) {
       router.push("/login-admin");
-    } 
+    }
+    console.log(orders);
   }, []);
 
   return (
-    <Layout>
-        
-        {process.browser &&sessionStorage.getItem("admin")?(
-          <>
+    <Layout title="Dashboard">
+      {process.browser && sessionStorage.getItem("admin") ? (
+        <>
           <NavBar />
           <div className="row p-0 m-0">
             <SideBar setSelectedOrders={setSelectedOrders} />
@@ -35,52 +35,28 @@ const AdminDashboard = ({ orders }) => {
                       return (
                         <div
                           key={i}
-                          className="col-11 p-3 d-flex text-left mx-auto rounded border my-2"
+                          className={
+                            theme === "dark"
+                              ? "col-11 p-3 d-flex text-left mx-auto border-top border-bottom border-warning my-2 mb-5 text-white"
+                              : "col-11 p-3 d-flex text-left mx-auto border-top border-bottom border-warning my-2 mb-5"
+                          }
                         >
-                          <div className="col-3 px-0">
-                            <div>ID: {order._id}</div>
-                          </div>
-                          <div className="col-6 text-center">
-                            <h4>
-                              <u>Adresse:</u>
-                            </h4>
-                            <p>
-                              Prénom: {order.shipping_address.first_name}
-                              <br />
-                              Nom: {order.shipping_address.last_name}
-                              <br />
-                              N°/Rue: {order.shipping_address.address}
-                              <br />
-                              Code postal: {order.shipping_address.zip_code}
-                              <br />
-                              Ville: {order.shipping_address.city}
-                              <br />
-                              Pays: {order.shipping_address.country}
-                            </p>
-                          </div>
-                          <div className="col-3 text-right d-flex flex-column justify-content-between">
-                            <div>
-                              Status:{" "}
-                              {order.state === "UNCHECKED" && "Non validé"}
-                              {order.state === "VALIDATED" && "Validé"}
-                              {order.state === "SENT" && "Envoyée"}
-                            </div>
-                            <div>
-                              Total: {order.ordered_objects.price} &euro;
-                            </div>
-                          </div>
+                          <OrderDetail order={order}/>
                         </div>
                       );
                     })
                   ) : (
-                    <div className="mx-auto"><h4>Pas de commandes en cours</h4></div>
+                    <div className="mx-auto">
+                      <h4>Pas de commandes en cours</h4>
+                    </div>
                   ))}
               </div>
             </div>
           </div>
         </>
-        ):("")}
-          
+      ) : (
+        ""
+      )}
     </Layout>
   );
 };

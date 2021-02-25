@@ -40,7 +40,7 @@ const orderSchema = new Schema(
     },
     state: {
       type: String,
-      enum: ["UNCHECKED", "CHECKED", "VALIDATED", "SENT"],
+      enum: ["UNCHECKED", "SENT"],
       default: "UNCHECKED",
     },
   },
