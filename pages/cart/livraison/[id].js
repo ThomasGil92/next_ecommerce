@@ -116,11 +116,6 @@ const Livraison = ({ user }) => {
 export default Livraison;
 
 export async function getServerSideProps(context) {
-  /*  const token = params.token;
-  console.log("context",context)
-  
- 
-  console.log(id) */
   const { id } = context.query
   console.log(context.query)
   const userUrl = await fetch(`${process.env.REST_API}/api/user/get/${id}`);

@@ -8,11 +8,12 @@ const CartRecap = () => {
   const [totalPrice, setTotalPrice] = useState();
 
   const theme = useSelector((state) => state.theme);
+  const cartInStore = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
       var cart = JSON.parse(localStorage.getItem("cart"));
-      console.log(cart);
+
       setAllProductInCart(cart);
       var t = 0;
 
@@ -22,7 +23,7 @@ const CartRecap = () => {
       });
       setTotalPrice(Number.parseFloat(t).toFixed(2));
     }
-  }, [setCart]);
+  }, [setCart,cartInStore]);
 
   const total = (product) => {
     var t = product.price * product.quantityInCart;
@@ -43,12 +44,6 @@ const CartRecap = () => {
 
   const addToCart = (productToAdd, operation, id) => (e) => {
     e.preventDefault();
-    /* if (operation === "add") {
-      productToAdd.quantityInCart++;
-    } else {
-      productToAdd.quantityInCart--;
-    }
- */
     console.log(productToAdd, operation);
     var cart = [];
     if (!localStorage.getItem("cart")) {
@@ -70,19 +65,20 @@ const CartRecap = () => {
         if (found.quantityInCart === 0) {
           console.log("Produit retiré");
         } else {
+          JSON.parse(allProductInLocal).forEach((p) => {
+            if (p._id !== found._id) {
+              cart.push(p);
+            }
+          });
           cart.push(found);
         }
-        JSON.parse(allProductInLocal).forEach((p) => {
-          if (p._id !== found._id) {
-            cart.push(p);
-          }
-        });
       } else {
         productToAdd.quantityInCart = 1;
-        cart.push(productToAdd);
+
         JSON.parse(allProductInLocal).forEach((p) => {
           cart.push(p);
         });
+        cart.push(productToAdd);
       }
 
       //cart.push(p);
@@ -110,7 +106,7 @@ const CartRecap = () => {
   return (
     <div className="row mx-0">
       {allProductInCart &&
-        allProductInCart.map(
+        allProductInCart.sort((a, b) => a.productName > b.productName ? 1:-1).map(
           (product, i) =>
             product.quantityInCart !== 0 && (
               <div
@@ -122,6 +118,17 @@ const CartRecap = () => {
                     : "col-10 my-3 py-2 d-flex mx-auto rounded bg-white"
                 }
               >
+                {product.quantityInCart > product.stock ? (
+                  <div
+                    className="position-absolute bg-danger"
+                    style={{ right: "-30px", top: "-10px" }}
+                  >
+                    Out of stock
+                  </div>
+                ) : (
+                  ""
+                )}
+
                 <div className="col-6 d-flex align-items-center">
                   <img
                     src={product.imageUrl}

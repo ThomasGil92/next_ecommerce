@@ -7,8 +7,9 @@ import { useEffect, useState } from "react";
 const Cart = ({ products }) => {
   const [totalNumberOfArticle, setTotalNumberOfArticle] = useState();
   const [totalPrice, setTotalPrice] = useState();
+  const [disabled, setDisabled] = useState();
 
-  const cart = useSelector((state) => state.cart);
+  const cartStore = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const theme = useSelector((state) => state.theme);
 
@@ -16,6 +17,21 @@ const Cart = ({ products }) => {
     if (process.browser) {
       if (localStorage.getItem("cart")) {
         var cart = JSON.parse(localStorage.getItem("cart"));
+
+        setDisabled(false)
+        var problem=false
+      if(cartStore.length){
+        console.log(cartStore)
+        cartStore.forEach((item)=>{
+          if(item.quantityInCart>item.stock){
+            console.log("articles en trop!")
+            problem=true
+            setDisabled(true)
+          }
+        })
+        console.log(problem)
+      }
+
         var t = 0;
         cart.map((p) => {
           t += p.quantityInCart;
@@ -30,7 +46,7 @@ const Cart = ({ products }) => {
         setTotalPrice(Number.parseFloat(t2).toFixed(2));
       }
     }
-  }, [cart]);
+  }, [cartStore]);
 
   return (
     <Layout title="Panier">
@@ -163,7 +179,7 @@ const Cart = ({ products }) => {
             }
             passHref
           >
-            <button className="btn btn-success h-100">
+            <button className="btn btn-success h-100" disabled={disabled}>
               Valider mon panier
             </button>
           </Link>

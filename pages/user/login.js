@@ -14,7 +14,7 @@ const Login = () => {
     }
   });
   return (
-    <Layout>
+    <Layout title="Connexion">
       {!userAuth.token && (
         <>
           <PublicNavBar />
