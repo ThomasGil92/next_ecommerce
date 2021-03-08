@@ -59,9 +59,9 @@ const success = () => {
           );
         }
 
-        function updateStock() {
+        async function updateStock() {
           cart.forEach(async (product) => {
-            console.log(product.quantityInCart);
+            console.log(product);
             const response = await axios.put(
               `${process.env.REST_API}/api/products/productStockUpdate`,
               {
@@ -74,8 +74,10 @@ const success = () => {
         retrieve().then((session) => {
           mailConfirmation().then((res) => {
             createOrder().then((response) => {
-              localStorage.removeItem("cart");
-              updateStock();
+              updateStock().then(()=>{
+                localStorage.removeItem("cart");
+              })
+              
             });
           });
         });

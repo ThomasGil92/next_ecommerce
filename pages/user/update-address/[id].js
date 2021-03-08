@@ -16,7 +16,7 @@ const UpdateAddress = ({ products, user }) => {
   });
 
   return (
-    <Layout>
+    <Layout title={"Adresse de livraison"}>
       {userAuth.token ? (
         <>
           <PublicNavBar products={products} />

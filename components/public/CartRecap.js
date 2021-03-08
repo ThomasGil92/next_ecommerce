@@ -94,11 +94,11 @@ const CartRecap = () => {
     if (operation === "remove") {
       tIndicator.textContent--;
     }
-    if (tIndicator.textContent <= 0) {
+   /*  if (tIndicator.textContent <= 0) {
       const elm = document.getElementById(`${id}`);
       console.log(elm);
       elm.remove();
-    }
+    } */
 
     setTotalPrice(totalCart());
   };

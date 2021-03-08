@@ -55,7 +55,7 @@ const UserUpdateAddressForm = ({ user }) => {
         data,
         false,
       ); // Update the local data without a revalidation
-      router.push(`/cart/livraison/${id}`);
+      router.push(`/user/profile/${id}`);
     } catch (error) {
       setState({ ...state, error: error });
       alert(error);

@@ -19,17 +19,17 @@ const UserProfile = ({ user }) => {
         if (userInSession.user._id !== router.query.id) {
           router.push("/user/login");
         }
-      }else if(!userAuth.token){
-        router.push("/user/login")
+      } else {
+        router.push("/user/login");
       }
     }
   });
 
   return (
-    <Layout>
-      {userAuth.token ? (
+    <Layout title="Mon compte">
+      <PublicNavBar />
+      {userAuth && userAuth.token ? (
         <>
-          <PublicNavBar />
           <div
             className={
               theme === "dark"

@@ -6,6 +6,7 @@ import { setCart } from "../../redux/actions";
 const PublicProductList = ({ products }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme);
+  const cart = useSelector((state) => state.cart);
   const [selectedProduct, setSelectedProduct] = useState({
     _id: "",
     price: "",
@@ -136,12 +137,29 @@ const PublicProductList = ({ products }) => {
                         <div className="col-md-6 px-0">
                           <motion.button
                             title={
-                              product.stock <= 0
+                              product.stock <= 0 ||
+                              (cart.length &&
+                                cart.find(
+                                  (element) => element._id === product._id,
+                                ).stock <
+                                  cart.find(
+                                    (element) => element._id === product._id,
+                                  ).quantityInCart)
                                 ? "Rupture de stock"
                                 : "Ajouter au panier"
                             }
                             onClick={addToCart(product)}
-                            disabled={product.stock <= 0 && true}
+                            disabled={
+                              product.stock <= 0 ||
+                              (cart.length &&
+                                cart.find(
+                                  (element) => element._id === product._id,
+                                ).stock <=
+                                  cart.find(
+                                    (element) => element._id === product._id,
+                                  ).quantityInCart &&
+                                true)
+                            }
                             initial={{
                               backgroundColor: "#e5e5e5",
                               color: "black",
@@ -149,8 +167,27 @@ const PublicProductList = ({ products }) => {
                             }}
                             whileHover={{
                               backgroundColor:
-                                product.stock > 0 ? "#FFC107" : "#e5e5e5",
-                              cursor: product.stock <= 0 && "not-allowed",
+                                product.stock <= 0 ||
+                                (cart.length &&
+                                  cart.find(
+                                    (element) => element._id === product._id,
+                                  ).stock <=
+                                    cart.find(
+                                      (element) => element._id === product._id,
+                                    ).quantityInCart)
+                                  ? "#e5e5e5"
+                                  : "#FFC107",
+                              cursor:
+                                product.stock <= 0 ||
+                                (cart.length &&
+                                  cart.find(
+                                    (element) => element._id === product._id,
+                                  ).stock <=
+                                    cart.find(
+                                      (element) => element._id === product._id,
+                                    ).quantityInCart)
+                                  ? "not-allowed"
+                                  : "pointer",
                               color: "red",
                               border: "none",
                             }}
@@ -194,10 +231,15 @@ const PublicProductList = ({ products }) => {
                   <span aria-hidden="true">&#x3c;</span>
                 </button>
                 <div>
-                  {stock > 0 ? (
-                    <div className="text-success">&#x2713; En stock</div>
-                  ) : (
+                  {stock <= 0 ||
+                  (cart.length &&
+                    cart.find((element) => element._id === _id).stock <
+                      cart.find((element) => element._id === _id)
+                        .quantityInCart &&
+                    true) ? (
                     <div className="text-danger">&#9888; Rupture de stock</div>
+                  ) : (
+                    <div className="text-success">&#x2713; En stock</div>
                   )}
                 </div>
               </div>
@@ -222,6 +264,14 @@ const PublicProductList = ({ products }) => {
                   Retour
                 </button>
                 <button
+                  disabled={
+                    stock <= 0 ||
+                    (cart.length &&
+                      cart.find((element) => element._id === _id).stock <
+                        cart.find((element) => element._id === _id)
+                          .quantityInCart &&
+                      true)
+                  }
                   type="submit"
                   form="updateProductForm"
                   className="btn btn-primary"

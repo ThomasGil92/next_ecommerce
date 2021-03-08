@@ -13,7 +13,7 @@ const CategoryById = ({ products, category }) => {
   });
 
   return (
-    <Layout>
+    <Layout title={category && category.category.categoryName}>
       <PublicNavBar />
       <CategoryHeader category={category} />
       <ProductsByCategoryList products={products} />

@@ -1,25 +1,41 @@
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Footer = () => {
+  const router = useRouter();
   const theme = useSelector((state) => state.theme);
   return (
-    <div className={theme==="dark"?"fixed-bottom border-top border-secondary":"fixed-bottom"}>
+    <div
+      className={
+        theme === "dark"
+          ? "fixed-bottom border-top border-secondary"
+          : "fixed-bottom"
+      }
+    >
       <ul className="nav bg-dark text-white justify-content-center">
-        <li className="nav-item">
-          <a className="nav-link" href="/">
+        <Link passHref href="/" className="nav-item">
+          <a
+            className={
+              router.route === "/"
+                ? "nav-link border-top border-warning text-warning"
+                : "nav-link"
+            }
+          >
             Accueil
           </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Link
+        </Link>
+        <Link href="mentions-legales" passHref className="nav-item">
+          <a
+            className={
+              router.route === "/mentions-legales"
+                ? "nav-link border-top border-warning text-warning"
+                : "nav-link"
+            }
+          >
+            Mentions Légales
           </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Link
-          </a>
-        </li>
+        </Link>
       </ul>
     </div>
   );
