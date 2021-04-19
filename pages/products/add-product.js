@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import NavBar from "../../components/admin/Navbar";
+import Navbar from "../../components/admin/Navbar";
 import AddProductForm from "../../components/products/AddProductForm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ const AddProduct = ({ categories }) => {
 
   return (
     <Layout>
-      <NavBar />
+      <Navbar />
       <AddProductForm categories={categories} />
     </Layout>
   );

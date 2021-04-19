@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import NavBar from "../components/admin/Navbar";
+import Navbar from "../components/admin/Navbar";
 import OrderDetail from "../components/admin/OrderDetail"
 import SideBar from "../components/admin/SideBar";
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const AdminDashboard = ({ orders }) => {
     <Layout title="Dashboard">
       {process.browser && sessionStorage.getItem("admin") ? (
         <>
-          <NavBar />
+          <Navbar />
           <div className="row p-0 m-0">
             <SideBar setSelectedOrders={setSelectedOrders} />
             <div className="text-center col-md-10 offset-md-2 mt-5 mb-2 py-4">

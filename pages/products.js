@@ -1,4 +1,4 @@
-import NavBar from "../components/admin/Navbar";
+import Navbar from "../components/admin/Navbar";
 import ProductsSideBar from "../components/admin/ProductsSideBar";
 import CategoriesSideBar from "../components/admin/CategoriesSideBar";
 import ProductsList from "../components/products/ProductsList";
@@ -35,7 +35,7 @@ const Products = ({ categories, products }) => {
   return (
     <Layout title="Inventaire">
       <>
-        <NavBar />
+        <Navbar />
         <div className="row p-0 m-0">
           <ProductsSideBar
             setShowCategories={setShowCategories}

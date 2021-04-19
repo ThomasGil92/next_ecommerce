@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import NavBar from "../../components/admin/Navbar";
+import Navbar from "../../components/admin/Navbar";
 import ProfileForm from "../../components/admin/ProfileForm";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -8,7 +8,7 @@ const ProfilePage = ({ email,name }) => {
   const router = useRouter();
   return (
     <Layout>
-      <NavBar />
+      <Navbar />
       <div
         className="w-100 d-flex flex-column align-items-center justify-content-center text-center position-absolute pt-5 mt-5"
         style={{ top: "0" }}

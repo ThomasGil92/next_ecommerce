@@ -4,7 +4,7 @@ import axios from "axios";
 import { withRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import LoadingState from "../../../components/admin/LoadingState";
-import NavBar from "../../../components/admin/Navbar"
+import Navbar from "../../../components/admin/Navbar"
 
 const ActivateAccount = ({ router }) => {
   const [loading, setLoading] = useState(true);
@@ -57,7 +57,7 @@ const ActivateAccount = ({ router }) => {
         <LoadingState />
       ) : (
         <>
-          <NavBar />
+          <Navbar />
           <div className="d-flex align-items-center vh-100 position-absolute" style={{top:"0"}}>
             <div className="col-md-6 offset-md-3">
               <h1>Bonjour {email}, prêt pour la création de votre compte?</h1>

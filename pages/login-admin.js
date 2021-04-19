@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import Layout from "../components/Layout";
 import LoadingState from "../components/admin/LoadingState";
-import NavBar from'../components/admin/Navbar'
+import Navbar from'../components/admin/Navbar'
 
 
 const Login = ({ router }) => {
@@ -98,7 +98,7 @@ useEffect(()=>{
   return (
     <Layout title="Admin connexion">
         <>
-        <NavBar />
+        <Navbar />
       <div className="container text-center mt-md-5 pt-md-5">
         <div className="mx-auto col-5 py-5">{loginForm()}</div>
       </div>
