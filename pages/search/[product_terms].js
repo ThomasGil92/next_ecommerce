@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import PublicNavbar from "../../components/public/PublicNavbar";
+import PublicNavbar from "../../components/public/PublicNavbar.js";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
