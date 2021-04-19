@@ -1,5 +1,5 @@
 import Layout from "../../../../components/Layout";
-import PublicNavbar from "../../../../components/public/PublicNavbar";
+import PublicNavbar from "../../../../components/public/PublicNavbar.js";
 import moment from "moment";
 import "moment/locale/fr";
 import ReactTooltip from "react-tooltip";
