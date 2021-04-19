@@ -31,7 +31,7 @@ export default async (req, res) => {
           },
         ],
         mode: "payment",
-        success_url: "https://next-ecommerce-beige.vercel.app//cart/success",
+        success_url: "https://next-ecommerce-beige.vercel.app/cart/success",
         cancel_url: "https://next-ecommerce-beige.vercel.app/",
       });
       res.status(200).json({ id: session.id });
