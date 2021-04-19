@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import LoadingState from "../../../components/admin/LoadingState";
-import PublicNavbar from "../../../components/public/PublicNavbar";
+import PublicNavbar from "../../../components/public/PublicNavbar.js";
 import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 

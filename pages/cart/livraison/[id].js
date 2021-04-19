@@ -1,5 +1,5 @@
 import Layout from "../../../components/Layout";
-import PublicNavbar from "../../../components/public/PublicNavbar";
+import PublicNavbar from "../../../components/public/PublicNavbar.js";
 import CartShippingAddress from "../../../components/public/CartShippingAddress";
 import CartValidation from "../../../components/public/CartValidation";
 import { useSelector } from "react-redux";

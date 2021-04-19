@@ -1,4 +1,4 @@
-import PublicNavbar from "../../../components/public/PublicNavbar";
+import PublicNavbar from "../../../components/public/PublicNavbar.js";
 import Layout from "../../../components/Layout";
 import UserUpdateAddressForm from "../../../components/user/UserUpdateAddressForm";
 import { useSelector } from "react-redux";

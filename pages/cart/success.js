@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import PublicNavbar from "../../components/public/PublicNavbar";
+import PublicNavbar from "../../components/public/PublicNavbar.js";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/actions";
 import { useEffect, useState } from "react";

@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import PublicNavbar from "../components/public/PublicNavbar";
+import PublicNavbar from "../components/public/PublicNavbar.js";
 import {useSelector} from 'react-redux'
 
 const LegalMention = () => {
