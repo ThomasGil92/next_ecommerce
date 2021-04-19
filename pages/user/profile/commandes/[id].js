@@ -19,7 +19,6 @@ const OrdersHistoric = ({ user, orders }) => {
     if (process.browser) {
       if (sessionStorage.getItem("user")) {
         const userInSession = JSON.parse(sessionStorage.getItem("user"));
-        console.log(router.query);
         if (userInSession.user._id !== router.query.id) {
           router.push("/user/login");
         }
@@ -60,7 +59,6 @@ const OrdersHistoric = ({ user, orders }) => {
       }
 
       //cart.push(p);
-      console.log(cart);
       localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(cart));
     }
@@ -251,7 +249,6 @@ export async function getServerSideProps(context) {
   const userUrl = await fetch(`${process.env.REST_API}/api/user/get/${id}`);
   const user = await userUrl.json();
   const order_id = user.user.orders;
-  console.log("order_id",order_id)
   const orders = [];
   await Promise.all(
     order_id.map(async (id) => {

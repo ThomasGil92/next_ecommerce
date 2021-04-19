@@ -25,7 +25,6 @@ const UpdatePassword = () => {
     }
     if (token) {
       const { email } = jwt.decode(token);
-      console.log(email)
       setState({
         ...state,
         email,
@@ -47,7 +46,6 @@ const UpdatePassword = () => {
           token,
         },
       );
-      console.log("state&co:", state,token)
       const { message } = await response;
       mutate(
         `${process.env.REST_API}/api/user/password-update`,

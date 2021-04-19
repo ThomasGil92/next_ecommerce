@@ -37,7 +37,6 @@ const AdminRegister = () => {
         email,
         password,
       });
-      console.log(response);
       setState({
         ...state,
         email: "",

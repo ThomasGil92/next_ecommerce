@@ -44,7 +44,6 @@ const CartRecap = () => {
 
   const addToCart = (productToAdd, operation, id) => (e) => {
     e.preventDefault();
-    console.log(productToAdd, operation);
     var cart = [];
     if (!localStorage.getItem("cart")) {
       productToAdd.quantityInCart = 1;
@@ -63,7 +62,6 @@ const CartRecap = () => {
           found.quantityInCart -= 1;
         }
         if (found.quantityInCart === 0) {
-          console.log("Produit retiré");
         } else {
           JSON.parse(allProductInLocal).forEach((p) => {
             if (p._id !== found._id) {
@@ -82,7 +80,6 @@ const CartRecap = () => {
       }
 
       //cart.push(p);
-      console.log(cart);
       localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(cart));
     }
@@ -94,11 +91,6 @@ const CartRecap = () => {
     if (operation === "remove") {
       tIndicator.textContent--;
     }
-   /*  if (tIndicator.textContent <= 0) {
-      const elm = document.getElementById(`${id}`);
-      console.log(elm);
-      elm.remove();
-    } */
 
     setTotalPrice(totalCart());
   };

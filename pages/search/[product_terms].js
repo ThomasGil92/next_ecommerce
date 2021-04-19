@@ -34,7 +34,6 @@ const searchResult = ({ products, query }) => {
       const filtered = products.filter((product) => {
         return product.productName.toLowerCase().includes(query.toLowerCase());
       });
-      console.log(filtered);
       setFilteredProducts({ filtered });
     }
     $("#exampleModal").on("show.bs.modal", function (event) {
@@ -83,7 +82,6 @@ const searchResult = ({ products, query }) => {
       }
 
       //cart.push(p);
-      console.log(cart);
       localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(cart));
     }

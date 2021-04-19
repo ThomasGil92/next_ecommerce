@@ -21,7 +21,6 @@ const Products = ({ categories, products }) => {
   useEffect(() => {
     if (theme === "dark") {
       const productList = document.getElementById("themeEl");
-      console.log(productList);
       if (productList !== null) {
         productList.classList.add("border-left");
         productList.classList.add("border-warning");

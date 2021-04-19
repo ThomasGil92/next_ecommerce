@@ -16,7 +16,6 @@ const AdminDashboard = ({ orders }) => {
     if (!sessionStorage.getItem("admin") && !sessionStorage.getItem("master")) {
       router.push("/login-admin");
     }
-    console.log(orders);
   }, []);
 
   return (

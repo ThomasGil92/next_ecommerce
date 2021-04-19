@@ -19,17 +19,12 @@ const Cart = ({ products }) => {
         var cart = JSON.parse(localStorage.getItem("cart"));
 
         setDisabled(false)
-        var problem=false
       if(cartStore.length){
-        console.log(cartStore)
         cartStore.forEach((item)=>{
           if(item.quantityInCart>item.stock){
-            console.log("articles en trop!")
-            problem=true
             setDisabled(true)
           }
         })
-        console.log(problem)
       }
 
         var t = 0;

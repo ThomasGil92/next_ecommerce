@@ -25,7 +25,6 @@ const ProfileForm = ({ userEmail, userName, query }) => {
           const response = await axios.put(`${process.env.REST_API}/api/admin/updateEmail`, {
             profile,
           });
-          console.log(response);
           sessionStorage.clear();
           sessionStorage.setItem("admin", JSON.stringify(response.data));
           // console.log('account activate response', response)
@@ -34,7 +33,6 @@ const ProfileForm = ({ userEmail, userName, query }) => {
           const response = await axios.put(`${process.env.REST_API}/api/admin/updatePassword`, {
             profile,
           });
-          console.log(response);
           sessionStorage.clear();
           sessionStorage.setItem("admin", JSON.stringify(response.data));
         }

@@ -21,7 +21,6 @@ const CartValidation = ({ address, total }) => {
     // Get Stripe.js instance
     const stripe = await stripePromise;
     // Call your backend to create the Checkout Session
-    console.log(process.env.NEXT_API)
     const response = await axios.post(
       `${process.env.NEXT_API}/api/checkout/create-session`,
       {

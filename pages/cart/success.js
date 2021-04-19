@@ -61,7 +61,6 @@ const success = () => {
 
         async function updateStock() {
           cart.forEach(async (product) => {
-            console.log(product);
             const response = await axios.put(
               `${process.env.REST_API}/api/products/productStockUpdate`,
               {

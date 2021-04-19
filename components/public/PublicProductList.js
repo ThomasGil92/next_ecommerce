@@ -72,7 +72,6 @@ const PublicProductList = ({ products }) => {
       }
 
       //cart.push(p);
-      console.log(cart);
       localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(cart));
     }

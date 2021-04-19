@@ -15,7 +15,6 @@ const UserProfile = ({ user }) => {
     if (process.browser) {
       if (sessionStorage.getItem("user")) {
         const userInSession = JSON.parse(sessionStorage.getItem("user"));
-        console.log(router.query);
         if (userInSession.user._id !== router.query.id) {
           router.push("/user/login");
         }

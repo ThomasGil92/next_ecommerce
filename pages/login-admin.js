@@ -52,7 +52,6 @@ useEffect(()=>{
         email,
         password,
       });
-      console.log(response); // data > token / user
       if (response.data.admin.role === 2) {
         sessionStorage.setItem("master", JSON.stringify(response.data));
       }
@@ -62,7 +61,6 @@ useEffect(()=>{
       dispatch(setAdmin())
         router.push("/admin-dashboard");
     } catch (error) {
-      console.log(error);
       setState({ ...state, buttonText: "Login", error:true });
       setClicked(false)
     }
