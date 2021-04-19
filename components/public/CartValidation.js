@@ -23,7 +23,7 @@ const CartValidation = ({ address, total }) => {
     const stripe = await stripePromise;
     // Call your backend to create the Checkout Session
     const response = await axios.post(
-      `${process.env.REST_API}/api/checkout/createSession`,
+      `${process.env.NEXT_API}/api/checkout/createSession`,
       {
         total,
         address,
