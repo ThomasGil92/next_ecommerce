@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import { useEffect } from "react";
-import PublicNavBar from "../../components/public/PublicNavBar";
+import PublicNavbar from "../../components/public/PublicNavbar";
 import UserLoginForm from "../../components/user/UserLoginForm";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ const Login = () => {
     <Layout title="Connexion">
       {!userAuth.token && (
         <>
-          <PublicNavBar />
+          <PublicNavbar />
           <UserLoginForm />
         </>
       )}

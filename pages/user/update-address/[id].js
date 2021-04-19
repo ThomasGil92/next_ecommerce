@@ -1,4 +1,4 @@
-import PublicNavBar from "../../../components/public/PublicNavBar";
+import PublicNavbar from "../../../components/public/PublicNavbar";
 import Layout from "../../../components/Layout";
 import UserUpdateAddressForm from "../../../components/user/UserUpdateAddressForm";
 import { useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const UpdateAddress = ({ products, user }) => {
     <Layout title={"Adresse de livraison"}>
       {userAuth.token ? (
         <>
-          <PublicNavBar products={products} />
+          <PublicNavbar products={products} />
           <div className="row mt-40 mt-md-5 pt-4 pt-md-5 mx-0 text-center">
             <UserUpdateAddressForm user={user} />
           </div>

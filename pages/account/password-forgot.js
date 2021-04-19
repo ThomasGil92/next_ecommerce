@@ -1,11 +1,11 @@
 import Layout from "../../components/Layout";
-import PublicNavBar from "../../components/public/PublicNavBar";
+import PublicNavbar from "../../components/public/PublicNavbar";
 import ForgotPasswordForm from "../../components/user/ForgotPasswordForm";
 
 const PasswordForgot = () => {
   return (
     <Layout>
-      <PublicNavBar />
+      <PublicNavbar />
       <ForgotPasswordForm/>
     </Layout>
   );

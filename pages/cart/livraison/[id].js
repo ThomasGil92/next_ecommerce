@@ -1,5 +1,5 @@
 import Layout from "../../../components/Layout";
-import PublicNavBar from "../../../components/public/PublicNavbar";
+import PublicNavbar from "../../../components/public/PublicNavbar";
 import CartShippingAddress from "../../../components/public/CartShippingAddress";
 import CartValidation from "../../../components/public/CartValidation";
 import { useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const Livraison = ({ user }) => {
   }, []);
   return (
     <Layout title="Adresse de livraison">
-      <PublicNavBar />
+      <PublicNavbar />
       <div className={theme==="dark"?"row flex-column mt-5 pt-3 mx-0 bg-dark":"row flex-column mt-5 pt-3 mx-0 bg-third"}>
         <div className="col-6 py-3 mx-auto d-flex justify-content-between">
           <div

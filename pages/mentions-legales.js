@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import PublicNavBar from "../components/public/PublicNavBar";
+import PublicNavbar from "../components/public/PublicNavbar";
 import {useSelector} from 'react-redux'
 
 const LegalMention = () => {
@@ -7,7 +7,7 @@ const LegalMention = () => {
 
   return (
     <Layout title="Mentions légales">
-      <PublicNavBar />
+      <PublicNavbar />
       <div className={theme==="dark"?"text-white col-8 mx-auto py-5 mt-5":"text-dark col-8 mx-auto py-5 mt-5"}>
        <h2>Informations légales</h2>
         <h3>1. Présentation du site.</h3>

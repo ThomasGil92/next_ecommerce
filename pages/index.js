@@ -1,12 +1,12 @@
 import Layout from "../components/Layout";
-import PublicNavBar from "../components/public/PublicNavbar";
+import PublicNavbar from "../components/public/PublicNavbar";
 import CategoriesSlider from "../components/public/CategoriesSlider";
 import PublicProductList from "../components/public/PublicProductList";
 
 export default function Home({ categories,products }) {
   return (
     <Layout title="Accueil">
-      <PublicNavBar products={products} />
+      <PublicNavbar products={products} />
       <CategoriesSlider categories={categories} />
       <PublicProductList products={products} />
       {/* to attribute

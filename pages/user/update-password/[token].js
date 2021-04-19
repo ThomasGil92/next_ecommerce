@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import axios from "axios";
-import PublicNavBar from "../../../components/public/PublicNavBar";
+import PublicNavbar from "../../../components/public/PublicNavbar";
 import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import { useSelector } from "react-redux";
@@ -65,7 +65,7 @@ const UpdatePassword = () => {
     <Layout>
       {userAuth.token ?(
         <>
-        <PublicNavBar />
+        <PublicNavbar />
         <div className="d-flex align-items-center">
           <div className="col-md-6 offset-md-3 mt-5 pt-5">
             <h1>Bienvenue {email && email}</h1>

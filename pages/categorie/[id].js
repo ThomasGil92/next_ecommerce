@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import PublicNavBar from "../../components/public/PublicNavbar";
+import PublicNavbar from "../../components/public/PublicNavbar";
 import CategoryHeader from "../../components/public/CategoryHeader";
 import ProductsByCategoryList from "../../components/public/ProductsByCategoryList";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ const CategoryById = ({ products, category }) => {
 
   return (
     <Layout title={category && category.category.categoryName}>
-      <PublicNavBar />
+      <PublicNavbar />
       <CategoryHeader category={category} />
       <ProductsByCategoryList products={products} />
     </Layout>

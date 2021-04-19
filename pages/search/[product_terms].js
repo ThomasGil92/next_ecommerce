@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import PublicNavBar from "../../components/public/PublicNavBar";
+import PublicNavbar from "../../components/public/PublicNavBar";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -92,7 +92,7 @@ const searchResult = ({ products, query }) => {
 
   return (
     <Layout>
-      <PublicNavBar />
+      <PublicNavbar />
       <div className="row mt-5 pt-5 mx-0 bg-third">
         <div className="col-12 d-flex">
           {filteredProducts && filteredProducts.filtered.length > 0 ? (

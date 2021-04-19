@@ -1,5 +1,5 @@
 import Layout from "../../../../components/Layout";
-import PublicNavBar from "../../../../components/public/PublicNavBar";
+import PublicNavbar from "../../../../components/public/PublicNavbar";
 import moment from "moment";
 import "moment/locale/fr";
 import ReactTooltip from "react-tooltip";
@@ -68,7 +68,7 @@ const OrdersHistoric = ({ user, orders }) => {
   };
 
   return (
-    <Layout title="Commandes"><PublicNavBar />
+    <Layout title="Commandes"><PublicNavbar />
       {userAuth.token ? (
         <>
           <div

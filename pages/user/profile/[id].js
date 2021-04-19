@@ -1,6 +1,6 @@
 import Layout from "../../../components/Layout";
 import { useEffect } from "react";
-import PublicNavBar from "../../../components/public/PublicNavBar";
+import PublicNavbar from "../../../components/public/PublicNavbar";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -27,7 +27,7 @@ const UserProfile = ({ user }) => {
 
   return (
     <Layout title="Mon compte">
-      <PublicNavBar />
+      <PublicNavbar />
       {userAuth && userAuth.token ? (
         <>
           <div

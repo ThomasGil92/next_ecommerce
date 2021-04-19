@@ -1,11 +1,11 @@
 import Layout from "../../components/Layout";
-import PublicNavBar from "../../components/public/PublicNavBar";
+import PublicNavbar from "../../components/public/PublicNavbar";
 import UserRegisterForm from "../../components/user/UserRegisterForm";
 
 const UserRegister = () => {
   return (
     <Layout>
-      <PublicNavBar />
+      <PublicNavbar />
       <UserRegisterForm/>
     </Layout>
   );

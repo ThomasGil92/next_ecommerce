@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import PublicNavBar from "../../components/public/PublicNavBar";
+import PublicNavbar from "../../components/public/PublicNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/actions";
 import { useEffect, useState } from "react";
@@ -91,7 +91,7 @@ const success = () => {
 
   return (
     <Layout>
-      <PublicNavBar />
+      <PublicNavbar />
       {authUser.token ? (
         <>
           <div

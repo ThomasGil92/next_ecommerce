@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import {ThemeButton} from '../uiComponent/ThemeButton'
 
-const PublicNavBar = ({ products }) => {
+const PublicNavbar = ({ products }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -235,4 +235,4 @@ const PublicNavBar = ({ products }) => {
     </>
   );
 };
-export default PublicNavBar;
+export default PublicNavbar;

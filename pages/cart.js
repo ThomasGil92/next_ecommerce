@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import PublicNavBar from "../components/public/PublicNavBar";
+import PublicNavbar from "../components/public/PublicNavbar";
 import CartRecap from "../components/public/CartRecap";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -50,7 +50,7 @@ const Cart = ({ products }) => {
 
   return (
     <Layout title="Panier">
-      <PublicNavBar products={products} />
+      <PublicNavbar products={products} />
       <div
         className={
           theme === "dark"
