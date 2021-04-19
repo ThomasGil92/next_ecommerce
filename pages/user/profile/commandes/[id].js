@@ -68,10 +68,9 @@ const OrdersHistoric = ({ user, orders }) => {
   };
 
   return (
-    <Layout title="Commandes">
+    <Layout title="Commandes"><PublicNavBar />
       {userAuth.token ? (
         <>
-          <PublicNavBar />
           <div
             className={
               theme === "dark"
@@ -252,6 +251,7 @@ export async function getServerSideProps(context) {
   const userUrl = await fetch(`${process.env.REST_API}/api/user/get/${id}`);
   const user = await userUrl.json();
   const order_id = user.user.orders;
+  console.log("order_id",order_id)
   const orders = [];
   await Promise.all(
     order_id.map(async (id) => {

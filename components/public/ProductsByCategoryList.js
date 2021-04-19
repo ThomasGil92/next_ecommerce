@@ -143,7 +143,7 @@ const PublicProductList = ({ products }) => {
                                 (cart.length &&
                                   cart.find(
                                     (element) => element._id === product._id,
-                                  ).stock <
+                                  ).stock <=
                                     cart.find(
                                       (element) => element._id === product._id,
                                     ).quantityInCart)
@@ -162,7 +162,7 @@ const PublicProductList = ({ products }) => {
                                   (cart.length &&
                                     cart.find(
                                       (element) => element._id === product._id,
-                                    ).stock <
+                                    ).stock <=
                                       cart.find(
                                         (element) =>
                                           element._id === product._id,
@@ -174,7 +174,7 @@ const PublicProductList = ({ products }) => {
                                   (cart.length &&
                                     cart.find(
                                       (element) => element._id === product._id,
-                                    ).stock <
+                                    ).stock <=
                                       cart.find(
                                         (element) =>
                                           element._id === product._id,
@@ -192,7 +192,7 @@ const PublicProductList = ({ products }) => {
                                 (cart.length &&
                                   cart.find(
                                     (element) => element._id === product._id,
-                                  ).stock <
+                                  ).stock <=
                                     cart.find(
                                       (element) => element._id === product._id,
                                     ).quantityInCart &&
@@ -240,7 +240,7 @@ const PublicProductList = ({ products }) => {
                 <div>
                   {stock <= 0 ||
                   (cart.length &&
-                    cart.find((element) => element._id === _id).stock <
+                    cart.find((element) => element._id === _id).stock <=
                       cart.find((element) => element._id === _id)
                         .quantityInCart &&
                     true) ? (
@@ -274,7 +274,7 @@ const PublicProductList = ({ products }) => {
                   disabled={
                     stock <= 0 ||
                     (cart.length &&
-                      cart.find((element) => element._id === _id).stock <
+                      cart.find((element) => element._id === _id).stock <=
                         cart.find((element) => element._id === _id)
                           .quantityInCart &&
                       true)

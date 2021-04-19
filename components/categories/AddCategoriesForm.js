@@ -6,7 +6,7 @@ const AddCategoriesForm = () => {
   const router = useRouter();
   const [categorieFields, setCategorieFields] = useState({
     categoryName: "",
-    imageUrl: "https://picsum.photos/1300/400",
+    imageUrl: "https://picsum.photos/1300/575",
   });
 
   const { categoryName, imageUrl } = categorieFields;

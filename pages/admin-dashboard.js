@@ -27,7 +27,7 @@ const AdminDashboard = ({ orders }) => {
           <div className="row p-0 m-0">
             <SideBar setSelectedOrders={setSelectedOrders} />
             <div className="text-center col-md-10 offset-md-2 mt-5 mb-2 py-4">
-              <h1>{isAuth.admin && isAuth.admin.name}</h1>
+              <h1 className={theme && theme==="dark"?"text-white":"text-dark"}>{isAuth.admin && isAuth.admin.name}</h1>
               <div className="row mt-5">
                 {selectedOrders === true &&
                   (orders.length > 0 ? (

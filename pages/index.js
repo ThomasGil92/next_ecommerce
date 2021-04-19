@@ -20,6 +20,7 @@ export async function getServerSideProps(context) {
   const categories = await categoriesUrl.json();
   const productsUrl = await fetch(`${process.env.REST_API}/api/product/get`);
   const products = await productsUrl.json();
+  
 
   return { props: { categories,products } };
 }
