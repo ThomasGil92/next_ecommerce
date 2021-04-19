@@ -9,7 +9,6 @@ const CartShippingAddress = ({ infos, token, setAddress }) => {
     e.preventDefault();
     setAddress(infos);
   };
-  console.log(infos)
   return (
     
       <div

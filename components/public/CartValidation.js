@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const CartValidation = ({ address, total }) => {
   const [state, setState] = useState();
-  const [completed, setCompleted] = useState(false);
 
   const theme = useSelector((state) => state.theme);
 
@@ -22,8 +21,9 @@ const CartValidation = ({ address, total }) => {
     // Get Stripe.js instance
     const stripe = await stripePromise;
     // Call your backend to create the Checkout Session
+    console.log(process.env.NEXT_API)
     const response = await axios.post(
-      `${process.env.NEXT_API}/api/checkout/createSession`,
+      `${process.env.NEXT_API}/api/checkout/create-session`,
       {
         total,
         address,
@@ -31,7 +31,6 @@ const CartValidation = ({ address, total }) => {
     );
     localStorage.setItem("session", JSON.stringify(response));
     const session = await response;
-
     // When the customer clicks on the button, redirect them to Checkout.
     const result = await stripe.redirectToCheckout({
       sessionId: session.data.id,
